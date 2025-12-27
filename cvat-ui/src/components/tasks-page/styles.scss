@@ -1,0 +1,265 @@
+// Copyright (C) 2020-2022 Intel Corporation
+// Copyright (C) Perceptron AI Corporation
+//
+// SPDX-License-Identifier: MIT
+
+@import 'base';
+@import '../../styles';
+
+// ===================================
+// PERCEPTRON TASKS PAGE DESIGN
+// ===================================
+
+.cvat-tasks-page {
+    @include cvat-resource-page;
+    padding: $grid-unit-size * 3;
+    background: $background-color-2;
+
+    .cvat-tasks-page-top-bar {
+        margin-right: 0;
+        background: $background-color-1;
+        padding: $grid-unit-size * 2 $grid-unit-size * 3;
+        border-radius: $border-radius-base;
+        margin-bottom: $grid-unit-size * 2;
+        box-shadow: $box-shadow-base;
+        border: 1px solid $border-color-1;
+
+        > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            > .cvat-tasks-page-filters-wrapper {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                gap: $grid-unit-size * 2;
+
+                > div {
+                    > *:not(:last-child) {
+                        margin-right: $grid-unit-size;
+                    }
+
+                    display: flex;
+                }
+
+                .cvat-tasks-page-search-bar {
+                    width: $grid-unit-size * 40;
+                    padding-left: 0;
+
+                    .ant-input-affix-wrapper {
+                        border-radius: $border-radius-sm;
+                        border: 1px solid $border-color-2;
+
+                        &:hover, &:focus {
+                            border-color: $primary-color;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.cvat-empty-tasks-list {
+    .ant-empty {
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+
+        .ant-empty-description {
+            color: $text-color-secondary;
+            font-size: 16px;
+        }
+    }
+}
+
+.cvat-tasks-pagination {
+    display: flex;
+    justify-content: center;
+    padding: $grid-unit-size * 2 0;
+
+    .ant-pagination-item {
+        border-radius: $border-radius-sm;
+        border: 1px solid $border-color-2;
+
+        &:hover, &.ant-pagination-item-active {
+            border-color: $primary-color;
+
+            a {
+                color: $primary-color;
+            }
+        }
+    }
+}
+
+.cvat-tasks-list {
+    overflow-y: auto;
+
+    .ant-ribbon-wrapper {
+        margin: $grid-unit-size;
+    }
+}
+
+.cvat-task-item-ribbon {
+    padding: $grid-unit-size;
+    height: unset;
+    border-radius: 0 0 0 $border-radius-sm;
+
+    > .ant-ribbon-text {
+        > div {
+            display: flex;
+            flex-direction: column;
+            gap: $grid-unit-size * 2;
+        }
+    }
+}
+
+.cvat-tasks-list-item {
+    width: 100%;
+    height: 130px;
+    border: 1px solid $border-color-1;
+    border-radius: $border-radius-base;
+    margin-bottom: $grid-unit-size * 2;
+    padding: $grid-unit-size * 2;
+    background: $background-color-1;
+    transition: all $transition-base;
+
+    &:hover {
+        border-color: $primary-light;
+        box-shadow: $box-shadow-hover;
+        transform: translateY(-2px);
+    }
+
+    .cvat-task-item-loading-preview,
+    .cvat-task-item-empty-preview {
+        @extend .cvat-base-preview;
+        font-size: $grid-unit-size * 6;
+        height: $grid-unit-size * 10;
+        background: $background-color-2;
+        border-radius: $border-radius-sm;
+        color: $text-color-muted;
+    }
+
+    .cvat-task-item-preview-wrapper {
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        margin: $grid-unit-size * 2;
+        margin-top: 0;
+        border-radius: $border-radius-sm;
+
+        > .cvat-task-item-preview {
+            max-width: 140px;
+            max-height: 80px;
+            border-radius: $border-radius-sm;
+        }
+    }
+}
+
+.cvat-task-item-description {
+    word-break: break-all;
+    max-height: 100%;
+    overflow: hidden;
+}
+
+.cvat-task-progress {
+    width: 100%;
+
+    .ant-progress-inner {
+        border-radius: $border-radius-sm;
+    }
+
+    .ant-progress-bg {
+        border-radius: $border-radius-sm;
+    }
+}
+
+.cvat-task-completed-progress {
+    color: $completed-progress-color;
+}
+
+.cvat-task-completed-progress div.ant-progress-bg {
+    background: $completed-progress-color !important;
+}
+
+.cvat-task-validation-progress {
+    color: $validation-progress-color;
+}
+
+.cvat-task-annotation-progress {
+    color: $annotation-progress-color;
+}
+
+.cvat-task-item-progress-wrapper {
+    > div:first-child {
+        margin-bottom: -$grid-unit-size;
+        margin-right: $grid-unit-size;
+
+        > span {
+            font-size: 12px;
+            font-weight: 500;
+            color: $text-color-secondary;
+        }
+
+        span[role="img"] {
+            margin-left: $grid-unit-size;
+        }
+    }
+}
+
+.close-auto-annotation-icon {
+    color: $danger-icon-color;
+    opacity: 0.7;
+    transition: opacity $transition-fast;
+
+    &:hover {
+        opacity: 1;
+    }
+}
+
+.cvat-item-open-task-actions {
+    margin-right: $grid-unit-size;
+    margin-top: $grid-unit-size;
+    display: flex;
+    align-items: center;
+    padding: $grid-unit-size;
+    line-height: 14px;
+
+    > div {
+        display: flex;
+    }
+}
+
+.cvat-item-open-task-button {
+    margin-right: $grid-unit-size * 2;
+
+    .ant-btn {
+        border-radius: $border-radius-sm;
+        font-weight: 500;
+
+        &.ant-btn-primary {
+            background: $primary-color;
+            border-color: $primary-color;
+
+            &:hover {
+                background: $primary-dark;
+                border-color: $primary-dark;
+            }
+        }
+    }
+}
+
+.cvat-item-task-name {
+    @extend .cvat-text-color;
+    font-family: $font-family-heading;
+    font-weight: 600;
+    font-size: 15px;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: $primary-color;
+    }
+}

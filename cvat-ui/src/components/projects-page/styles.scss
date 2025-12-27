@@ -1,0 +1,285 @@
+// Copyright (C) 2020-2022 Intel Corporation
+// Copyright (C) Perceptron AI Corporation
+//
+// SPDX-License-Identifier: MIT
+
+@import 'base';
+
+// ===================================
+// PERCEPTRON PROJECTS PAGE DESIGN
+// ===================================
+
+.cvat-projects-page {
+    @include cvat-resource-page;
+    padding: $grid-unit-size * 3;
+    background: $background-color-2;
+
+    > div:nth-child(1) {
+        padding-bottom: $grid-unit-size * 2;
+
+        div > {
+            span {
+                color: $text-color;
+            }
+        }
+    }
+}
+
+.cvat-empty-projects-list {
+    .ant-empty {
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+
+        .ant-empty-description {
+            color: $text-color-secondary;
+            font-size: 16px;
+        }
+    }
+}
+
+.cvat-projects-page-control-buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    background: $background-color-1;
+    padding: $grid-unit-size * 2;
+    border-radius: $border-radius-base;
+    box-shadow: $box-shadow-base;
+    border: 1px solid $border-color-1;
+
+    > * {
+        &:not(:first-child) {
+            margin-top: $grid-unit-size * 1.5;
+        }
+
+        width: 100%;
+
+        .ant-upload {
+            width: 100%;
+
+            button {
+                width: 100%;
+                border-radius: $border-radius-sm;
+            }
+        }
+    }
+}
+
+.cvat-projects-page-top-bar {
+    background: $background-color-1;
+    padding: $grid-unit-size * 2 $grid-unit-size * 3;
+    border-radius: $border-radius-base;
+    margin-bottom: $grid-unit-size * 2;
+    box-shadow: $box-shadow-base;
+    border: 1px solid $border-color-1;
+
+    > div {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        > .cvat-projects-page-filters-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: $grid-unit-size * 2;
+
+            > div {
+                > *:not(:last-child) {
+                    margin-right: $grid-unit-size;
+                }
+
+                display: flex;
+            }
+
+            .cvat-projects-page-search-bar {
+                width: $grid-unit-size * 40;
+
+                .ant-input-affix-wrapper {
+                    border-radius: $border-radius-sm;
+                    border: 1px solid $border-color-2;
+
+                    &:hover, &:focus {
+                        border-color: $primary-color;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.cvat-projects-pagination {
+    display: flex;
+    justify-content: center;
+    padding: $grid-unit-size * 2 0;
+
+    .ant-pagination-item {
+        border-radius: $border-radius-sm;
+        border: 1px solid $border-color-2;
+
+        &:hover, &.ant-pagination-item-active {
+            border-color: $primary-color;
+
+            a {
+                color: $primary-color;
+            }
+        }
+    }
+}
+
+.ant-menu.cvat-project-actions-menu {
+    box-shadow: $box-shadow-lg;
+    border-radius: $border-radius-base;
+    border: 1px solid $border-color-1;
+    padding: $grid-unit-size;
+
+    > li {
+        border-radius: $border-radius-sm;
+
+        &:hover {
+            background-color: $hover-menu-color;
+        }
+    }
+
+    .ant-menu-submenu-title {
+        margin: 0;
+        width: 13em;
+    }
+}
+
+.cvat-project-list-content {
+    .ant-ribbon-wrapper {
+        .cvat-projects-project-item-card {
+            border-radius: $border-radius-base;
+            border: 1px solid $border-color-1;
+            background: $background-color-1;
+            transition: all $transition-base;
+            overflow: hidden;
+
+            &:hover {
+                border-color: $primary-light;
+                box-shadow: $box-shadow-hover;
+                transform: translateY(-2px);
+            }
+
+            .cvat-projects-project-item-card-preview-wrapper {
+                height: 100%;
+                background: $background-color-2;
+
+                .cvat-projects-project-item-card-preview {
+                    height: 100%;
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-around;
+                    object-fit: cover;
+                    cursor: pointer;
+                }
+            }
+
+            .cvat-project-item-loading-preview,
+            .cvat-project-item-empty-preview {
+                @extend .cvat-base-preview;
+                background: $background-color-2;
+                color: $text-color-muted;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            .cvat-project-item-loading-preview {
+                padding-top: $grid-unit-size * 3;
+            }
+
+            .cvat-projects-project-item-title {
+                cursor: pointer;
+                font-family: $font-family-heading;
+                font-weight: 600;
+                font-size: 16px;
+                color: $text-color;
+                transition: color $transition-fast;
+
+                &:hover {
+                    color: $primary-color;
+                }
+            }
+
+            .cvat-projects-project-item-description {
+                display: flex;
+                justify-content: space-between;
+                padding: $grid-unit-size * 1.5;
+
+                // actions button
+                > div:nth-child(2) {
+                    display: flex;
+                    align-self: flex-end;
+                    justify-content: center;
+
+                    > button {
+                        color: $text-color-secondary;
+                        width: inherit;
+                        border-radius: $border-radius-sm;
+
+                        &:hover {
+                            color: $primary-color;
+                            background: $hover-menu-color;
+                        }
+                    }
+                }
+            }
+
+            .ant-card-cover {
+                flex: 1;
+                height: 0;
+            }
+
+            display: flex;
+            flex-direction: column;
+        }
+
+        &:nth-child(4n) {
+            border-right: 0;
+        }
+    }
+}
+
+.cvat-project-item-ribbon {
+    padding: $grid-unit-size;
+    height: unset;
+    border-radius: 0 0 0 $border-radius-sm;
+
+    > .ant-ribbon-text {
+        > div {
+            display: flex;
+            flex-direction: column;
+            gap: $grid-unit-size * 2;
+        }
+    }
+}
+
+.cvat-projects-list {
+    overflow-y: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: $grid-unit-size * 2;
+
+    .cvat-projects-list-row {
+        width: 100%;
+        margin-bottom: $grid-unit-size;
+
+        > div:not(:first-child) {
+            padding-left: $grid-unit-size;
+        }
+    }
+}
+
+.cvat-export-project-loading {
+    margin-left: 10;
+}
+
+.cvat-import-project-button-loading {
+    margin-left: 10;
+}

@@ -1,0 +1,201 @@
+// Copyright (C) 2020-2022 Intel Corporation
+// Copyright (C) Perceptron AI Corporation
+//
+// SPDX-License-Identifier: MIT
+
+@import 'base';
+
+// ===================================
+// PERCEPTRON HEADER DESIGN
+// ===================================
+
+.cvat-header.ant-layout-header {
+    display: flex;
+    padding-left: $grid-unit-size * 3;
+    padding-right: $grid-unit-size * 3;
+    line-height: 0;
+    height: $header-height;
+    background: $background-color-1;
+    justify-content: space-between;
+    border-bottom: 1px solid $border-color-1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.ant-btn.ant-btn-link.cvat-header-button {
+    color: $text-color-secondary;
+    margin-right: $grid-unit-size * 0.5;
+    font-weight: 500;
+    font-size: 14px;
+    border-radius: $border-radius-sm;
+    padding: $grid-unit-size $grid-unit-size * 1.5;
+    height: auto;
+    transition: all $transition-fast;
+
+    &:hover {
+        color: $primary-color;
+        background: $hover-menu-color;
+    }
+
+    &.cvat-active-header-button {
+        color: $primary-color;
+        background: $hover-menu-color;
+        font-weight: 600;
+    }
+}
+
+.cvat-logo-icon {
+    width: max-content;
+    height: $grid-unit-size * 5;
+    max-width: $grid-unit-size * 20;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity $transition-fast;
+
+    &:hover {
+        opacity: 0.85;
+    }
+
+    img {
+        object-fit: contain;
+        max-width: 100%;
+        max-height: 100%;
+    }
+}
+
+.cvat-left-header {
+    .ant-btn.cvat-header-button {
+        opacity: 1;
+
+        &.cvat-active-header-button {
+            font-weight: 600;
+            opacity: 1;
+        }
+    }
+
+    .cvat-logo-icon {
+        margin-right: $grid-unit-size * 4;
+    }
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.cvat-right-header {
+    width: auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: $grid-unit-size;
+
+    > a.ant-btn {
+        span[role='img'] {
+            font-size: 20px;
+            line-height: 20px;
+        }
+    }
+}
+
+.cvat-header-menu-user-dropdown {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: $grid-unit-size * 0.5 $grid-unit-size;
+    border-radius: $border-radius-sm;
+    transition: background $transition-fast;
+
+    &:hover {
+        background: $hover-menu-color;
+    }
+
+    .anticon.cvat-header-dropdown-icon {
+        &.anticon-caret-down {
+            font-size: 10px;
+            color: $text-color-secondary;
+        }
+
+        font-size: 18px;
+        padding: $grid-unit-size * 0.5;
+        color: $text-color-secondary;
+    }
+
+    .cvat-header-menu-user-dropdown-organization {
+        font-size: 11px;
+        color: $text-color-secondary;
+        font-weight: 500;
+    }
+
+    > div:nth-child(2) {
+        max-width: $grid-unit-size * 18;
+        height: auto;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        align-items: center;
+        font-weight: 500;
+        color: $text-color;
+        line-height: 1.4;
+    }
+}
+
+.cvat-header-menu {
+    width: $grid-unit-size * 28;
+    border-radius: $border-radius-base;
+    box-shadow: $box-shadow-lg;
+    border: 1px solid $border-color-1;
+    padding: $grid-unit-size;
+
+    .ant-dropdown-menu-item {
+        border-radius: $border-radius-sm;
+        padding: $grid-unit-size * 1.25 $grid-unit-size * 1.5;
+        font-weight: 500;
+
+        &:hover {
+            background: $hover-menu-color;
+            color: $primary-color;
+        }
+
+        .anticon {
+            margin-right: $grid-unit-size;
+            font-size: 16px;
+        }
+    }
+
+    .ant-dropdown-menu-item-divider {
+        margin: $grid-unit-size 0;
+    }
+}
+
+.cvat-header-menu-active-organization-item {
+    background: $hover-menu-color;
+
+    ::after {
+        content: ' ✓';
+        float: right;
+        margin-left: $grid-unit-size;
+        color: $primary-color;
+        font-weight: 600;
+    }
+
+    font-weight: 600;
+    color: $primary-color;
+}
+
+.cvat-shortcuts-modal-window-table {
+    .ant-table {
+        max-height: $grid-unit-size * 70;
+        overflow-y: auto;
+        border-radius: $border-radius-base;
+    }
+
+    .ant-table-thead > tr > th {
+        background: $background-color-2;
+        font-weight: 600;
+    }
+}

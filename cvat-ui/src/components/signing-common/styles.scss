@@ -1,0 +1,652 @@
+// Copyright (C) Perceptron AI Corporation
+//
+// SPDX-License-Identifier: MIT
+
+@import '../../styles';
+
+// ===================================
+// PERCEPTRON SIGNING PAGES
+// Clean Modern Design
+// ===================================
+
+$heading-font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+$signing-font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$error-color: #ef4444;
+$action-button-color-1: #6366f1;
+$action-button-color-2: #4f46e5;
+$action-button-color-3: #818cf8;
+$placeholder-color: rgba(255, 255, 255, 0.5);
+$base-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+$input-transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+// Theme colors
+$page-bg: #0f172a;
+$card-bg: #1e293b;
+$card-border: rgba(255, 255, 255, 0.1);
+$text-white: #ffffff;
+$text-light: rgba(255, 255, 255, 0.9);
+$text-muted: rgba(255, 255, 255, 0.6);
+
+// Main wrapper
+.cvat-signing-page-wrapper {
+    min-height: 100vh;
+    background: $page-bg !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.cvat-signing-layout {
+    font-family: $signing-font;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+    background: transparent !important;
+
+    .ant-layout-content {
+        background: transparent;
+    }
+}
+
+// Background
+.cvat-signing-background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    overflow: hidden;
+    
+    &::before {
+        content: '';
+        position: absolute;
+        top: -200px;
+        right: -200px;
+        width: 600px;
+        height: 600px;
+        background: radial-gradient(circle, rgba(99, 102, 241, 0.2) 0%, transparent 70%);
+        border-radius: 50%;
+        filter: blur(60px);
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        bottom: -200px;
+        left: -200px;
+        width: 500px;
+        height: 500px;
+        background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 70%);
+        border-radius: 50%;
+        filter: blur(60px);
+    }
+}
+
+.cvat-signing-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.06) 0%, transparent 60%);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+// Left side content
+.cvat-signing-title {
+    padding-right: 80px;
+    max-width: 520px;
+
+    .ant-typography {
+        color: $text-white !important;
+        margin: 0 !important;
+        font-size: 56px;
+        font-family: $heading-font;
+        font-weight: 700;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+    }
+
+    .ant-typography:nth-child(2) {
+        background: linear-gradient(135deg, #818cf8 0%, #a855f7 50%, #ec4899 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+}
+
+// Feature list
+.cvat-signing-features {
+    margin-top: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: $action-button-color-3;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        span {
+            color: $text-light;
+            font-size: 15px;
+            font-weight: 500;
+        }
+    }
+}
+
+// Header
+.cvat-signing-header-logo-wrapper {
+    height: 100%;
+}
+
+.cvat-signing-header {
+    background: transparent !important;
+    position: fixed;
+    padding: 32px 0 0 0;
+    width: 100%;
+    z-index: 100;
+    height: auto !important;
+    line-height: normal !important;
+
+    .cvat-logo-icon {
+        filter: brightness(0) invert(1);
+        height: 40px;
+        transition: $base-transition;
+        opacity: 0.95;
+
+        &:hover {
+            opacity: 1;
+        }
+
+        img {
+            height: 100%;
+            width: auto;
+        }
+    }
+}
+
+// Links - ensure white/light color
+.cvat-credentials-link {
+    a {
+        color: $action-button-color-3 !important;
+        text-decoration: none;
+        font-weight: 500;
+        font-size: 14px;
+        transition: $input-transition;
+
+        &:hover {
+            color: $text-white !important;
+        }
+    }
+    
+    .ant-typography {
+        color: $text-muted !important;
+    }
+}
+
+// Navigation - back arrow and links
+.cvat-credentials-navigation {
+    margin-bottom: 8px;
+    min-height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    // Back arrow icon - make it WHITE
+    .anticon {
+        font-size: 20px;
+        color: $text-white !important;
+        cursor: pointer;
+        transition: $input-transition;
+        padding: 8px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+            fill: $text-white !important;
+            color: $text-white !important;
+            
+            path {
+                fill: $text-white !important;
+            }
+        }
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    }
+}
+
+// Form item with label above input
+.cvat-credentials-form-item {
+    margin-bottom: 20px !important;
+    position: relative;
+
+    // Label styling
+    .ant-form-item-label {
+        text-align: left;
+        padding-bottom: 8px;
+
+        > label {
+            color: $action-button-color-3 !important;
+            font-size: 13px;
+            font-weight: 500;
+            height: auto;
+
+            &::before, &::after {
+                display: none !important;
+            }
+        }
+    }
+
+    // Plain Input styling
+    .ant-input {
+        border: 1.5px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        padding: 14px 16px;
+        transition: $base-transition;
+        background: rgba(255, 255, 255, 0.04) !important;
+        height: 52px;
+        font-size: 15px;
+        font-weight: 400;
+        color: $text-white !important;
+
+        &::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        &:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        &:focus {
+            border-color: $action-button-color-1 !important;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+            background: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus {
+            box-shadow: 0 0 0 1000px $card-bg inset !important;
+            -webkit-text-fill-color: $text-white !important;
+        }
+    }
+
+    // Input with suffix (like clear icon)
+    .ant-input-affix-wrapper {
+        border: 1.5px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        padding: 0 16px;
+        transition: $base-transition;
+        background: rgba(255, 255, 255, 0.04) !important;
+        height: 52px;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        &.ant-input-affix-wrapper-focused {
+            border-color: $action-button-color-1 !important;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+            background: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        .ant-input {
+            border: none !important;
+            background: transparent !important;
+            padding: 0 !important;
+            height: 100%;
+            box-shadow: none !important;
+
+            &:focus {
+                border: none !important;
+                box-shadow: none !important;
+            }
+        }
+
+        .ant-input-prefix {
+            display: none !important;
+        }
+
+        .ant-input-suffix {
+            .anticon {
+                color: rgba(255, 255, 255, 0.5);
+                font-size: 18px;
+                cursor: pointer;
+                transition: $input-transition;
+
+                &:hover {
+                    color: $text-white;
+                }
+            }
+        }
+    }
+
+    // Password input
+    .ant-input-password {
+        border: 1.5px solid rgba(255, 255, 255, 0.12);
+        border-radius: 12px;
+        padding: 0 16px;
+        transition: $base-transition;
+        background: rgba(255, 255, 255, 0.04) !important;
+        height: 52px;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        &.ant-input-affix-wrapper-focused {
+            border-color: $action-button-color-1 !important;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+            background: rgba(255, 255, 255, 0.06) !important;
+        }
+
+        .ant-input {
+            border: none !important;
+            background: transparent !important;
+            padding: 0 !important;
+            height: 100%;
+            box-shadow: none !important;
+            color: $text-white !important;
+
+            &:focus {
+                border: none !important;
+                box-shadow: none !important;
+            }
+        }
+
+        .ant-input-suffix {
+            .anticon {
+                color: rgba(255, 255, 255, 0.5) !important;
+                font-size: 18px;
+                cursor: pointer;
+                transition: $input-transition;
+
+                &:hover {
+                    color: $text-white !important;
+                }
+            }
+        }
+    }
+}
+
+.cvat-credentials-form-item.ant-form-item-has-error {
+    .ant-input,
+    .ant-input-affix-wrapper,
+    .ant-input-password {
+        border-color: $error-color !important;
+    }
+
+    .ant-input-affix-wrapper-focused,
+    .ant-input:focus,
+    .ant-input-password.ant-input-affix-wrapper-focused {
+        box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.15) !important;
+    }
+
+    .ant-form-item-explain-error {
+        color: $error-color;
+        font-size: 13px;
+        margin-top: 8px;
+    }
+}
+
+// Action button
+.cvat-credentials-action-button {
+    width: 100%;
+    border-radius: 12px;
+    background: $action-button-color-1;
+    height: 52px;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    transition: $base-transition;
+    margin-top: 8px;
+
+    &:hover {
+        background: $action-button-color-2 !important;
+        color: white !important;
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px -8px rgba(99, 102, 241, 0.5);
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+
+    &:disabled {
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: $text-muted !important;
+        box-shadow: none;
+        cursor: not-allowed;
+        transform: none;
+    }
+}
+
+// Login form card
+.cvat-login-form-wrapper {
+    border-radius: 20px;
+    background: $card-bg;
+    padding: 36px;
+    width: 400px;
+    max-width: 90vw;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 20px 60px -20px rgba(0, 0, 0, 0.4);
+
+    .ant-form-item {
+        margin-bottom: 0;
+    }
+
+    .ant-form-item-explain-error:not(:first-child) {
+        display: none;
+    }
+
+    h2 {
+        font-family: $heading-font;
+        font-weight: 600;
+        font-size: 26px;
+        color: $text-white;
+        margin-bottom: 28px;
+        letter-spacing: -0.02em;
+    }
+}
+
+// Form containers
+.cvat-signing-form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
+    .ant-form-item:last-child:not(.cvat-credentials-form-item) {
+        margin-top: 20px;
+        width: 100%;
+    }
+}
+
+.cvat-login-form {
+    @extend .cvat-signing-form;
+    margin-top: 20px;
+
+    .ant-form-item:first-child {
+        margin-bottom: 0;
+    }
+}
+
+.cvat-login-form-extended {
+    .ant-form-item:first-child {
+        margin-bottom: 0;
+    }
+}
+
+// Password reset form
+.cvat-password-reset-form-wrapper {
+    @extend .cvat-login-form-wrapper;
+
+    h2 {
+        margin-bottom: 12px;
+    }
+
+    .cvat-password-reset-tip {
+        font-weight: 400;
+        color: $text-muted;
+        margin-bottom: 28px;
+        font-size: 14px;
+        line-height: 1.6;
+    }
+}
+
+.cvat-password-reset-form {
+    @extend .cvat-signing-form;
+    margin-top: 16px;
+
+    .cvat-credentials-form-item {
+        margin-bottom: 16px !important;
+    }
+}
+
+// Register form
+.cvat-register-form-wrapper {
+    @extend .cvat-login-form-wrapper;
+    width: 420px;
+
+    .cvat-register-form {
+        @extend .cvat-signing-form;
+    }
+
+    .cvat-agreements-form-item {
+        margin-top: 20px;
+
+        .ant-checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            color: $text-muted;
+        }
+
+        .ant-checkbox {
+            .ant-checkbox-inner {
+                width: 20px;
+                height: 20px;
+                border-radius: 6px;
+                background: transparent;
+                border: 1.5px solid rgba(255, 255, 255, 0.2);
+                transition: $input-transition;
+
+                &:hover {
+                    border-color: $action-button-color-1;
+                }
+
+                &::after {
+                    width: 6px;
+                    height: 10px;
+                    left: 6px;
+                    top: 2px;
+                }
+            }
+        }
+
+        .ant-checkbox-checked {
+            .ant-checkbox-inner {
+                background: $action-button-color-1;
+                border-color: $action-button-color-1;
+            }
+        }
+    }
+
+    .cvat-register-form-last-field {
+        margin-bottom: 0;
+    }
+}
+
+.cvat-register-form-wrapper-extended {
+    @extend .cvat-login-form-wrapper;
+    width: 420px;
+
+    .cvat-register-form-last-field {
+        margin-bottom: 8px;
+    }
+
+    .cvat-register-form {
+        @extend .cvat-signing-form;
+    }
+}
+
+// Social login
+.cvat-social-authentication {
+    margin-top: 28px;
+
+    .cvat-social-authentication-divider {
+        display: flex;
+        align-items: center;
+        margin: 20px 0;
+
+        &::before,
+        &::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        span {
+            padding: 0 16px;
+            color: $text-muted;
+            font-size: 12px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+    }
+
+    .ant-btn {
+        width: 100%;
+        height: 48px;
+        border-radius: 12px;
+        border: 1.5px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        transition: $base-transition;
+        color: $text-light;
+
+        &:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        img, svg {
+            width: 20px;
+            height: 20px;
+        }
+    }
+}
