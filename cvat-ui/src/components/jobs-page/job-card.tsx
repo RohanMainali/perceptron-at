@@ -21,7 +21,7 @@ const useCardHeight = useCardHeightHOC({
     siblingClassNames: ['cvat-jobs-page-pagination', 'cvat-jobs-page-top-bar'],
     paddings: 80,
     minHeight: 200,
-    numberOfRows: 3,
+    numberOfRows: 4,
 });
 
 interface Props {

@@ -4,74 +4,362 @@
 // SPDX-License-Identifier: MIT
 
 @import 'base';
-@import '../../styles';
 
-// ===================================
-// PERCEPTRON TASKS PAGE DESIGN
-// ===================================
+// Modernized tasks overview
+.cvat-tasks-page {
+    background: $background-color-2;
+    height: calc(100vh - #{$header-height});
+    padding: $grid-unit-size * 3 $grid-unit-size * 3;
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 1600px) {
+        padding: $grid-unit-size * 3 $grid-unit-size * 5;
+    }
+}
+
+.cvat-tasks-page-top-bar {
+    flex-shrink: 0;
+    margin: 0 auto $grid-unit-size * 3;
+    width: 100%;
+    background: $background-color-1;
+    border: 1px solid $border-color-1;
+    border-radius: $border-radius-base;
+    padding: $grid-unit-size * 2 $grid-unit-size * 3;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+
+    > .ant-col {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+.cvat-tasks-page-filters-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $grid-unit-size * 2;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    > div:first-of-type {
+        display: flex;
+        align-items: center;
+        gap: $grid-unit-size * 1.5;
+        flex-wrap: nowrap;
+        min-width: 0;
+    }
+
+    > div:last-of-type {
+        display: flex;
+        align-items: center;
+        gap: $grid-unit-size * 1.5;
+        flex-wrap: nowrap;
+        margin-left: auto;
+    }
+}
+
+.cvat-tasks-page-search-bar {
+    width: 260px;
+    flex: 0 0 auto;
+
+    // Keep enterButton perfectly aligned with the input
+    .ant-input-wrapper {
+        display: flex;
+        align-items: stretch;
+    }
+
+    .ant-input-group-addon {
+        flex: 0 0 auto;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .ant-input-affix-wrapper {
+        flex: 1 1 auto;
+        width: auto !important;
+        height: 42px;
+        border-radius: $border-radius-sm 0 0 $border-radius-sm !important;
+        border: 1px solid $border-color-1 !important;
+        border-right: none !important;
+        background: $background-color-2 !important;
+        padding: 0 $grid-unit-size * 1.5;
+        transition: all $transition-fast;
+
+        &:hover {
+            border-color: $border-color-2 !important;
+        }
+
+        &:focus-within {
+            border-color: $primary-color !important;
+            background: $background-color-1 !important;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12) !important;
+        }
+
+        .ant-input {
+            background: transparent !important;
+            color: $text-color;
+
+            &::placeholder {
+                color: $text-color-muted;
+            }
+        }
+    }
+
+    .ant-input-group-addon {
+        .ant-btn-primary {
+            height: 42px !important;
+            width: 42px !important;
+            min-width: 42px !important;
+            border-radius: 0 $border-radius-sm $border-radius-sm 0 !important;
+            background: $primary-color !important;
+            border: 1px solid $primary-color !important;
+            border-left: none !important;
+            margin-left: 0 !important;
+
+            &:hover {
+                background: $primary-dark !important;
+                border-color: $primary-dark !important;
+            }
+        }
+    }
+
+    // Ensure proper spacing after the search component
+    & + * {
+        margin-left: $grid-unit-size * 5 !important;
+    }
+}
 
 .cvat-tasks-page {
-    @include cvat-resource-page;
-    padding: $grid-unit-size * 3;
-    background: $background-color-2;
+    .cvat-resource-list-wrapper {
+        flex: 1 1 auto;
+        overflow: auto;
+        align-items: start;
+    }
 
-    .cvat-tasks-page-top-bar {
-        margin-right: 0;
-        background: $background-color-1;
-        padding: $grid-unit-size * 2 $grid-unit-size * 3;
-        border-radius: $border-radius-base;
-        margin-bottom: $grid-unit-size * 2;
-        box-shadow: $box-shadow-base;
-        border: 1px solid $border-color-1;
+    .cvat-resource-pagination-wrapper {
+        margin-top: auto;
+        flex-shrink: 0;
+    }
+}
 
-        > div {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+.cvat-tasks-page-filters-wrapper {
+    .ant-btn-link {
+        color: $primary-color !important;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 0 $grid-unit-size;
+        height: 42px;
 
-            > .cvat-tasks-page-filters-wrapper {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-                gap: $grid-unit-size * 2;
+        &:hover {
+            color: $primary-dark !important;
+        }
+    }
 
-                > div {
-                    > *:not(:last-child) {
-                        margin-right: $grid-unit-size;
-                    }
+    .ant-btn-default {
+        height: 42px !important;
+        border-radius: $border-radius-sm !important;
+        border: 1px solid $border-color-1 !important;
+        background: $background-color-1 !important;
+        font-weight: 500;
+        font-size: 13px;
+        color: $text-color !important;
+        padding: 0 $grid-unit-size * 1.5 !important;
 
-                    display: flex;
-                }
-
-                .cvat-tasks-page-search-bar {
-                    width: $grid-unit-size * 40;
-                    padding-left: 0;
-
-                    .ant-input-affix-wrapper {
-                        border-radius: $border-radius-sm;
-                        border: 1px solid $border-color-2;
-
-                        &:hover, &:focus {
-                            border-color: $primary-color;
-                        }
-                    }
-                }
-            }
+        &:hover {
+            border-color: $primary-color !important;
+            color: $primary-color !important;
         }
     }
 }
 
+.cvat-create-task-dropdown {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    border-radius: $border-radius-sm !important;
+    padding: 0 !important;
+    background: $primary-color !important;
+    border: none !important;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2) !important;
+
+    &:hover {
+        background: $primary-dark !important;
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(99, 102, 241, 0.3) !important;
+    }
+}
+
+.cvat-resource-list-wrapper {
+    > .ant-col {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+.cvat-tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: $grid-unit-size * 2;
+}
+
+.cvat-task-item-ribbon {
+    padding: $grid-unit-size;
+    border-radius: 0 0 0 $border-radius-sm;
+
+    > .ant-ribbon-text {
+        > div {
+            display: flex;
+            flex-direction: column;
+            gap: $grid-unit-size;
+        }
+    }
+}
+
+.cvat-tasks-list-item {
+    width: 100%;
+    border: 1px solid $border-color-1;
+    border-radius: $border-radius-base;
+    background: $background-color-1;
+    padding: $grid-unit-size * 2;
+    margin: 0;
+    transition: all $transition-base;
+    row-gap: $grid-unit-size * 2;
+
+    &:hover {
+        border-color: rgba(99, 102, 241, 0.3);
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+        transform: translateY(-2px);
+    }
+
+    &.cvat-item-selected {
+        border-color: $primary-color;
+        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.18);
+    }
+
+    .ant-col {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+
+.cvat-task-item-preview-wrapper {
+    width: 100%;
+    height: 160px;
+    border-radius: $border-radius-sm;
+    overflow: hidden;
+    background: linear-gradient(145deg, $background-color-2 0%, $background-color-3 100%);
+
+    img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.cvat-task-item-loading-preview,
+.cvat-task-item-empty-preview {
+    @extend .cvat-base-preview;
+    background: linear-gradient(145deg, $background-color-2 0%, $background-color-3 100%);
+    color: $text-color-muted;
+    font-size: $grid-unit-size * 5.5;
+}
+
+.cvat-task-item-description {
+    gap: $grid-unit-size * 0.5;
+
+    .cvat-item-task-id {
+        color: $primary-color;
+    }
+
+    .cvat-item-task-name {
+        font-family: $font-family-heading;
+        font-size: 18px;
+        color: $text-color;
+    }
+
+    span.ant-typography-secondary {
+        color: $text-color-secondary;
+    }
+}
+
+.cvat-task-item-progress-wrapper {
+    gap: $grid-unit-size;
+
+    > div:first-child {
+        display: flex;
+        flex-direction: column;
+        gap: $grid-unit-size * 0.75;
+    }
+
+    .ant-progress-inner {
+        background: $background-color-3;
+        border-radius: $border-radius-sm;
+    }
+
+    .ant-progress-bg,
+    .ant-progress-success-bg {
+        border-radius: $border-radius-sm;
+    }
+
+    .cvat-task-completed-progress {
+        color: $completed-progress-color;
+    }
+
+    .cvat-task-validation-progress {
+        color: $warning-color;
+    }
+
+    .cvat-task-annotation-progress {
+        color: $primary-color;
+    }
+}
+
+.cvat-item-open-task-button {
+    border-radius: $border-radius-sm;
+    height: 40px;
+    min-width: 110px;
+    font-weight: 600;
+}
+
+.cvat-task-item-actions-button {
+    display: inline-flex;
+    align-items: center;
+    gap: $grid-unit-size;
+    color: $text-color-secondary;
+    border-radius: $border-radius-sm;
+    padding: $grid-unit-size;
+
+    &:hover {
+        color: $primary-color;
+        background: $hover-menu-color;
+    }
+}
+
 .cvat-empty-tasks-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+
     .ant-empty {
-        top: 50%;
-        left: 50%;
-        position: absolute;
-        transform: translate(-50%, -50%);
+        .ant-empty-image {
+            height: 112px;
+            margin-bottom: $grid-unit-size * 2.5;
+
+            svg {
+                width: 112px;
+                height: 112px;
+                opacity: 0.4;
+            }
+        }
 
         .ant-empty-description {
             color: $text-color-secondary;
-            font-size: 16px;
+            font-size: 15px;
+            font-weight: 500;
         }
     }
 }
@@ -79,187 +367,69 @@
 .cvat-tasks-pagination {
     display: flex;
     justify-content: center;
-    padding: $grid-unit-size * 2 0;
+    padding: $grid-unit-size * 3 0;
 
     .ant-pagination-item {
         border-radius: $border-radius-sm;
-        border: 1px solid $border-color-2;
+        border: 1px solid $border-color-1;
+        min-width: 36px;
+        height: 36px;
+        line-height: 34px;
+        font-weight: 500;
 
-        &:hover, &.ant-pagination-item-active {
+        a {
+            color: $text-color;
+        }
+
+        &:hover {
             border-color: $primary-color;
 
             a {
                 color: $primary-color;
             }
         }
-    }
-}
 
-.cvat-tasks-list {
-    overflow-y: auto;
-
-    .ant-ribbon-wrapper {
-        margin: $grid-unit-size;
-    }
-}
-
-.cvat-task-item-ribbon {
-    padding: $grid-unit-size;
-    height: unset;
-    border-radius: 0 0 0 $border-radius-sm;
-
-    > .ant-ribbon-text {
-        > div {
-            display: flex;
-            flex-direction: column;
-            gap: $grid-unit-size * 2;
-        }
-    }
-}
-
-.cvat-tasks-list-item {
-    width: 100%;
-    height: 130px;
-    border: 1px solid $border-color-1;
-    border-radius: $border-radius-base;
-    margin-bottom: $grid-unit-size * 2;
-    padding: $grid-unit-size * 2;
-    background: $background-color-1;
-    transition: all $transition-base;
-
-    &:hover {
-        border-color: $primary-light;
-        box-shadow: $box-shadow-hover;
-        transform: translateY(-2px);
-    }
-
-    .cvat-task-item-loading-preview,
-    .cvat-task-item-empty-preview {
-        @extend .cvat-base-preview;
-        font-size: $grid-unit-size * 6;
-        height: $grid-unit-size * 10;
-        background: $background-color-2;
-        border-radius: $border-radius-sm;
-        color: $text-color-muted;
-    }
-
-    .cvat-task-item-preview-wrapper {
-        display: flex;
-        justify-content: center;
-        overflow: hidden;
-        margin: $grid-unit-size * 2;
-        margin-top: 0;
-        border-radius: $border-radius-sm;
-
-        > .cvat-task-item-preview {
-            max-width: 140px;
-            max-height: 80px;
-            border-radius: $border-radius-sm;
-        }
-    }
-}
-
-.cvat-task-item-description {
-    word-break: break-all;
-    max-height: 100%;
-    overflow: hidden;
-}
-
-.cvat-task-progress {
-    width: 100%;
-
-    .ant-progress-inner {
-        border-radius: $border-radius-sm;
-    }
-
-    .ant-progress-bg {
-        border-radius: $border-radius-sm;
-    }
-}
-
-.cvat-task-completed-progress {
-    color: $completed-progress-color;
-}
-
-.cvat-task-completed-progress div.ant-progress-bg {
-    background: $completed-progress-color !important;
-}
-
-.cvat-task-validation-progress {
-    color: $validation-progress-color;
-}
-
-.cvat-task-annotation-progress {
-    color: $annotation-progress-color;
-}
-
-.cvat-task-item-progress-wrapper {
-    > div:first-child {
-        margin-bottom: -$grid-unit-size;
-        margin-right: $grid-unit-size;
-
-        > span {
-            font-size: 12px;
-            font-weight: 500;
-            color: $text-color-secondary;
-        }
-
-        span[role="img"] {
-            margin-left: $grid-unit-size;
-        }
-    }
-}
-
-.close-auto-annotation-icon {
-    color: $danger-icon-color;
-    opacity: 0.7;
-    transition: opacity $transition-fast;
-
-    &:hover {
-        opacity: 1;
-    }
-}
-
-.cvat-item-open-task-actions {
-    margin-right: $grid-unit-size;
-    margin-top: $grid-unit-size;
-    display: flex;
-    align-items: center;
-    padding: $grid-unit-size;
-    line-height: 14px;
-
-    > div {
-        display: flex;
-    }
-}
-
-.cvat-item-open-task-button {
-    margin-right: $grid-unit-size * 2;
-
-    .ant-btn {
-        border-radius: $border-radius-sm;
-        font-weight: 500;
-
-        &.ant-btn-primary {
+        &.ant-pagination-item-active {
             background: $primary-color;
             border-color: $primary-color;
 
+            a {
+                color: white;
+            }
+        }
+    }
+
+    .ant-pagination-prev,
+    .ant-pagination-next {
+        .ant-pagination-item-link {
+            border-radius: $border-radius-sm;
+            border: 1px solid $border-color-1;
+            height: 36px;
+            width: 36px;
+
             &:hover {
-                background: $primary-dark;
-                border-color: $primary-dark;
+                border-color: $primary-color;
+                color: $primary-color;
             }
         }
     }
 }
 
-.cvat-item-task-name {
-    @extend .cvat-text-color;
-    font-family: $font-family-heading;
-    font-weight: 600;
-    font-size: 15px;
-    transition: color $transition-fast;
+.ant-menu.cvat-task-actions-menu {
+    box-shadow: $box-shadow-lg;
+    border-radius: $border-radius-base;
+    border: 1px solid $border-color-1;
+    padding: $grid-unit-size;
 
-    &:hover {
-        color: $primary-color;
+    > li {
+        border-radius: $border-radius-sm;
+        font-weight: 500;
+        height: 38px;
+        line-height: 38px;
+
+        &:hover {
+            background-color: $hover-menu-color;
+            color: $primary-color;
+        }
     }
 }

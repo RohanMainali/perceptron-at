@@ -1,12 +1,20 @@
 // Copyright (C) 2021-2022 Intel Corporation
-// Copyright (C) CVAT.ai Corporation
+// Copyright (C) Perceptron AI Corporation
 //
 // SPDX-License-Identifier: MIT
 
 @import 'base';
 
+// ===================================
+// PERCEPTRON CLOUD STORAGES PAGE
+// Clean white design matching other pages
+// ===================================
+
 .cvat-cloud-storages-page {
     @include cvat-resource-page;
+    padding: $grid-unit-size * 4;
+    background: $background-color-1;
+    min-height: calc(100vh - #{$header-height});
 
     .ant-spin {
         position: absolute;
@@ -17,12 +25,17 @@
 
 .cvat-empty-cloud-storages-list-icon {
     font-size: $grid-unit-size * 14;
-    opacity: 0.5;
+    opacity: 0.4;
     margin-bottom: $grid-unit-size * 2;
+    color: $text-color-muted;
 }
 
 .cvat-cloud-storages-list-top-bar {
-    margin-bottom: $grid-unit-size;
+    margin-bottom: $grid-unit-size * 3;
+    background: $background-color-2;
+    padding: $grid-unit-size * 2 $grid-unit-size * 3;
+    border-radius: $border-radius-base;
+    border: 1px solid $border-color-1;
 
     > div {
         display: flex;
@@ -40,11 +53,45 @@
                 }
 
                 display: flex;
-                margin-right: $grid-unit-size * 4;
+                align-items: center;
             }
 
             .cvat-cloudstorages-page-tasks-search-bar {
-                width: $grid-unit-size * 32;
+                width: $grid-unit-size * 40;
+
+                .ant-input-affix-wrapper {
+                    border-radius: $border-radius-sm;
+                    border: 1px solid $border-color-2;
+                    background: $background-color-1;
+                    height: 40px;
+
+                    &:hover, &:focus-within {
+                        border-color: $primary-color;
+                        box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08);
+                    }
+
+                    .ant-input {
+                        background: transparent;
+                    }
+                }
+            }
+
+            .ant-btn-primary {
+                height: 40px;
+                min-width: 40px;
+                border-radius: $border-radius-sm;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .ant-btn-link {
+                color: $primary-color;
+                font-weight: 500;
+
+                &:hover {
+                    color: $primary-dark;
+                }
             }
         }
     }
@@ -54,6 +101,7 @@
     display: flex;
     flex-wrap: wrap;
     overflow-y: auto;
+    gap: $grid-unit-size * 3;
 
     .cvat-cloud-storages-list-row {
         width: 100%;
@@ -71,10 +119,33 @@
         left: 50%;
         position: absolute;
         transform: translate(-50%, -50%);
+
+        .ant-empty-image {
+            height: 120px;
+            margin-bottom: $grid-unit-size * 3;
+        }
+
+        .ant-empty-description {
+            color: $text-color-secondary;
+            font-size: 16px;
+            font-weight: 500;
+        }
     }
 }
 
 .cvat-cloud-storage-item {
+    border: 1px solid $border-color-1;
+    border-radius: $border-radius-base;
+    background: $background-color-1;
+    transition: all $transition-base;
+    overflow: hidden;
+
+    &:hover {
+        border-color: $primary-light;
+        box-shadow: 0 8px 30px rgba(99, 102, 241, 0.12);
+        transform: translateY(-4px);
+    }
+
     div.ant-typography {
         margin-bottom: 0;
     }
@@ -84,12 +155,13 @@
     .cvat-cloud-storage-item-loading-preview,
     .cvat-cloud-storage-item-empty-preview {
         @extend .cvat-base-preview;
-
         height: $grid-unit-size * 24;
+        background: linear-gradient(135deg, $background-color-2 0%, $background-color-3 100%);
 
         svg {
             width: 40%;
             height: 40%;
+            opacity: 0.5;
         }
     }
 
@@ -100,16 +172,52 @@
         width: 100%;
     }
 
-    .cvat-cloud-storage-item-menu-button {
-        position: absolute;
-        bottom: 0;
-        right: 0;
+    .ant-card-body {
+        padding: $grid-unit-size * 2;
     }
 
-    .cvat-cloud-storage-description-icon {
-        position: absolute;
-        top: $grid-unit-size;
-        width: auto;
-        right: $grid-unit-size;
+    .cvat-cloud-storage-item-title {
+        font-family: $font-family-heading;
+        font-weight: 600;
+        font-size: 15px;
+        color: $text-color;
+    }
+
+    .cvat-cloud-storage-item-description {
+        color: $text-color-secondary;
+        font-size: 13px;
+    }
+}
+
+.cvat-cloud-storages-pagination {
+    display: flex;
+    justify-content: center;
+    padding: $grid-unit-size * 3 0;
+
+    .ant-pagination-item {
+        border-radius: $border-radius-sm;
+        border: 1px solid $border-color-2;
+        font-weight: 500;
+
+        a {
+            color: $text-color;
+        }
+
+        &:hover {
+            border-color: $primary-color;
+
+            a {
+                color: $primary-color;
+            }
+        }
+
+        &.ant-pagination-item-active {
+            background: $primary-color;
+            border-color: $primary-color;
+
+            a {
+                color: white;
+            }
+        }
     }
 }

@@ -71,6 +71,35 @@ function TopBarComponent(props: Readonly<Props>): JSX.Element {
                             placeholder='Search ...'
                         />
                         <ResourceSelectionInfo selectedCount={selectedCount} onSelectAll={onSelectAll} />
+                        <Popover
+                            destroyTooltipOnHide
+                            trigger={['click']}
+                            overlayInnerStyle={{ padding: 0 }}
+                            content={(
+                                <div className='cvat-projects-page-control-buttons-wrapper'>
+                                    <Button
+                                        id='cvat-create-project-button'
+                                        className='cvat-create-project-button'
+                                        type='primary'
+                                        onClick={(): void => history.push('/projects/create')}
+                                        icon={<PlusOutlined />}
+                                    >
+                                        Create a new project
+                                    </Button>
+                                    <Button
+                                        className='cvat-import-project-button'
+                                        type='primary'
+                                        disabled={importing}
+                                        icon={importing ? <LoadingOutlined /> : <UploadOutlined />}
+                                        onClick={() => dispatch(importActions.openImportBackupModal('project'))}
+                                    >
+                                        Create from backup
+                                    </Button>
+                                </div>
+                            )}
+                        >
+                            <Button type='primary' className='cvat-create-project-dropdown' icon={<PlusOutlined />} />
+                        </Popover>
                     </div>
                     <div>
                         <SortingComponent
@@ -99,37 +128,6 @@ function TopBarComponent(props: Readonly<Props>): JSX.Element {
                             onApplyFilter={onApplyFilter}
                         />
                     </div>
-                </div>
-                <div>
-                    <Popover
-                        destroyTooltipOnHide
-                        trigger={['click']}
-                        overlayInnerStyle={{ padding: 0 }}
-                        content={(
-                            <div className='cvat-projects-page-control-buttons-wrapper'>
-                                <Button
-                                    id='cvat-create-project-button'
-                                    className='cvat-create-project-button'
-                                    type='primary'
-                                    onClick={(): void => history.push('/projects/create')}
-                                    icon={<PlusOutlined />}
-                                >
-                                    Create a new project
-                                </Button>
-                                <Button
-                                    className='cvat-import-project-button'
-                                    type='primary'
-                                    disabled={importing}
-                                    icon={importing ? <LoadingOutlined /> : <UploadOutlined />}
-                                    onClick={() => dispatch(importActions.openImportBackupModal('project'))}
-                                >
-                                    Create from backup
-                                </Button>
-                            </div>
-                        )}
-                    >
-                        <Button type='primary' className='cvat-create-project-dropdown' icon={<PlusOutlined />} />
-                    </Popover>
                 </div>
             </Col>
         </Row>

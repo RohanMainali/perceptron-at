@@ -5,37 +5,213 @@
 
 @import 'base';
 
-// ===================================
-// PERCEPTRON PROJECTS PAGE DESIGN
-// ===================================
+// Modernized projects hub layout
+.cvat-projects-page {
+    background: $background-color-2;
+    height: calc(100vh - #{$header-height});
+    padding: $grid-unit-size * 3 $grid-unit-size * 3;
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 1600px) {
+        padding: $grid-unit-size * 3 $grid-unit-size * 5;
+    }
+}
+
+.cvat-projects-page-top-bar {
+    flex-shrink: 0;
+    margin: 0 auto $grid-unit-size * 3;
+    width: 100%;
+    background: $background-color-1;
+    border: 1px solid $border-color-1;
+    border-radius: $border-radius-base;
+    padding: $grid-unit-size * 2 $grid-unit-size * 3;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+
+    > .ant-col {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+.cvat-projects-page-filters-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $grid-unit-size * 2;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    > div:first-of-type {
+        display: flex;
+        align-items: center;
+        gap: $grid-unit-size * 1.5;
+        flex-wrap: nowrap;
+        min-width: 0;
+    }
+
+    > div:last-of-type {
+        display: flex;
+        align-items: center;
+        gap: $grid-unit-size * 1.5;
+        flex-wrap: nowrap;
+        margin-left: auto;
+    }
+}
+
+.cvat-projects-page-search-bar {
+    width: 260px;
+    flex: 0 0 auto;
+
+    // Keep enterButton perfectly aligned with the input
+    .ant-input-wrapper {
+        display: flex;
+        align-items: stretch;
+    }
+
+    .ant-input-group-addon {
+        flex: 0 0 auto;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .ant-input-affix-wrapper {
+        flex: 1 1 auto;
+        width: auto !important;
+        height: 42px;
+        border-radius: $border-radius-sm 0 0 $border-radius-sm !important;
+        border: 1px solid $border-color-1 !important;
+        border-right: none !important;
+        background: $background-color-2 !important;
+        padding: 0 $grid-unit-size * 1.5;
+        transition: all $transition-fast;
+
+        &:hover {
+            border-color: $border-color-2 !important;
+        }
+
+        &:focus-within {
+            border-color: $primary-color !important;
+            background: $background-color-1 !important;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12) !important;
+        }
+
+        .ant-input {
+            background: transparent !important;
+            color: $text-color;
+
+            &::placeholder {
+                color: $text-color-muted;
+            }
+        }
+    }
+
+    .ant-input-group-addon {
+        .ant-btn-primary {
+            height: 42px !important;
+            width: 42px !important;
+            min-width: 42px !important;
+            border-radius: 0 $border-radius-sm $border-radius-sm 0 !important;
+            background: $primary-color !important;
+            border: 1px solid $primary-color !important;
+            border-left: none !important;
+            margin-left: 0 !important;
+
+            &:hover {
+                background: $primary-dark !important;
+                border-color: $primary-dark !important;
+            }
+        }
+    }
+
+    // Ensure proper spacing after the search component
+    & + * {
+        margin-left: $grid-unit-size * 5 !important;
+    }
+}
 
 .cvat-projects-page {
-    @include cvat-resource-page;
-    padding: $grid-unit-size * 3;
-    background: $background-color-2;
+    .cvat-project-list-content {
+        flex: 1 1 auto;
+        overflow: auto;
+        align-items: start;
+    }
 
-    > div:nth-child(1) {
-        padding-bottom: $grid-unit-size * 2;
+    .cvat-resource-pagination-wrapper {
+        margin-top: auto;
+        flex-shrink: 0;
+    }
+}
 
-        div > {
-            span {
-                color: $text-color;
-            }
+.cvat-projects-page-filters-wrapper {
+    .ant-btn-link {
+        color: $primary-color !important;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 0 $grid-unit-size;
+        height: 42px;
+
+        &:hover {
+            color: $primary-dark !important;
+        }
+    }
+
+    .ant-btn-default {
+        height: 42px !important;
+        border-radius: $border-radius-sm !important;
+        border: 1px solid $border-color-1 !important;
+        background: $background-color-1 !important;
+        font-weight: 500;
+        font-size: 13px;
+        color: $text-color !important;
+        padding: 0 $grid-unit-size * 1.5 !important;
+        transition: all $transition-fast;
+
+        &:hover {
+            border-color: $primary-color !important;
+            color: $primary-color !important;
+        }
+    }
+
+    .ant-btn-text {
+        color: $primary-color !important;
+        font-weight: 500;
+        font-size: 13px;
+        height: 42px;
+        padding: 0 $grid-unit-size;
+
+        &:hover:not(:disabled) {
+            color: $primary-dark !important;
+            background: transparent !important;
+        }
+
+        &:disabled {
+            color: $text-color-muted !important;
+            opacity: 0.5;
         }
     }
 }
 
-.cvat-empty-projects-list {
-    .ant-empty {
-        top: 50%;
-        left: 50%;
-        position: absolute;
-        transform: translate(-50%, -50%);
+.cvat-create-project-dropdown {
+    width: 42px !important;
+    height: 42px !important;
+    min-width: 42px !important;
+    border-radius: $border-radius-sm !important;
+    padding: 0 !important;
+    background: $primary-color !important;
+    border: none !important;
+    box-shadow: 0 8px 20px rgba(99, 102, 241, 0.2) !important;
 
-        .ant-empty-description {
-            color: $text-color-secondary;
-            font-size: 16px;
-        }
+    &:hover {
+        background: $primary-dark !important;
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(99, 102, 241, 0.3) !important;
+    }
+
+    .anticon {
+        font-size: 18px;
+        color: white;
     }
 }
 
@@ -43,93 +219,282 @@
     display: flex;
     flex-direction: column;
     background: $background-color-1;
-    padding: $grid-unit-size * 2;
-    border-radius: $border-radius-base;
-    box-shadow: $box-shadow-base;
-    border: 1px solid $border-color-1;
+    padding: $grid-unit-size * 1.5;
+    border-radius: $border-radius-sm;
+    min-width: 220px;
+    box-shadow: 0 16px 40px rgba(15, 23, 42, 0.12);
 
     > * {
-        &:not(:first-child) {
-            margin-top: $grid-unit-size * 1.5;
-        }
-
         width: 100%;
+
+        &:not(:first-child) {
+            margin-top: $grid-unit-size;
+        }
 
         .ant-upload {
             width: 100%;
 
             button {
                 width: 100%;
-                border-radius: $border-radius-sm;
             }
         }
     }
+
+    .ant-btn {
+        height: 42px;
+        border-radius: $border-radius-sm;
+        font-weight: 500;
+        justify-content: flex-start;
+        padding-left: $grid-unit-size * 1.5;
+    }
 }
 
-.cvat-projects-page-top-bar {
-    background: $background-color-1;
-    padding: $grid-unit-size * 2 $grid-unit-size * 3;
-    border-radius: $border-radius-base;
+.cvat-project-list-content {
     margin-bottom: $grid-unit-size * 2;
-    box-shadow: $box-shadow-base;
-    border: 1px solid $border-color-1;
 
-    > div {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    > .ant-col {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
 
-        > .cvat-projects-page-filters-wrapper {
+.cvat-projects-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: $grid-unit-size * 2.5;
+
+    @media (max-width: 1400px) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (max-width: 1100px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+
+    .cvat-projects-list-row {
+        display: contents;
+    }
+
+    .ant-col {
+        padding: 0 !important;
+        max-width: 100% !important;
+        flex: none !important;
+        width: auto !important;
+    }
+}
+
+.cvat-projects-project-item-card {
+    border-radius: $border-radius-base !important;
+    border: 1px solid $border-color-1 !important;
+    background: $background-color-1 !important;
+    overflow: hidden;
+    transition: all $transition-base;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    &:hover {
+        border-color: rgba(99, 102, 241, 0.32) !important;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+        transform: translateY(-2px);
+    }
+
+    &.cvat-item-selected {
+        border-color: $primary-color !important;
+        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+
+    .ant-card-cover {
+        height: 140px;
+        flex: 0 0 auto;
+    }
+
+    .ant-card-body {
+        padding: $grid-unit-size * 2;
+        border-top: 1px solid $border-color-1;
+    }
+}
+
+.cvat-projects-project-item-card-preview-wrapper {
+    height: 100%;
+    background: linear-gradient(145deg, $background-color-2 0%, $background-color-3 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+
+    .cvat-projects-project-item-card-preview {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.cvat-project-item-loading-preview,
+.cvat-project-item-empty-preview {
+    @extend .cvat-base-preview;
+    background: linear-gradient(145deg, $background-color-2 0%, $background-color-3 100%);
+    color: $text-color-muted;
+    font-size: $grid-unit-size * 5.5;
+}
+
+.cvat-projects-project-item-title {
+    cursor: pointer;
+    font-family: $font-family-heading;
+    font-weight: 600;
+    font-size: 16px;
+    color: $text-color;
+    margin-bottom: $grid-unit-size * 0.75;
+    transition: color $transition-fast;
+
+    &:hover {
+        color: $primary-color;
+    }
+}
+
+.cvat-projects-project-item-description {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: $grid-unit-size * 1.5;
+
+    > div:first-child {
+        .ant-typography-secondary {
+            font-size: 13px;
+            color: $text-color-secondary;
+            line-height: 1.5;
+        }
+    }
+
+    > div:last-child {
+        .ant-btn {
+            color: $text-color-muted;
+            width: 32px;
+            height: 32px;
+            padding: 0;
+            border-radius: $border-radius-sm;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            width: 100%;
-            gap: $grid-unit-size * 2;
+            justify-content: center;
 
-            > div {
-                > *:not(:last-child) {
-                    margin-right: $grid-unit-size;
-                }
-
-                display: flex;
-            }
-
-            .cvat-projects-page-search-bar {
-                width: $grid-unit-size * 40;
-
-                .ant-input-affix-wrapper {
-                    border-radius: $border-radius-sm;
-                    border: 1px solid $border-color-2;
-
-                    &:hover, &:focus {
-                        border-color: $primary-color;
-                    }
-                }
+            &:hover {
+                color: $primary-color;
+                background: $hover-menu-color;
             }
         }
     }
 }
 
-.cvat-projects-pagination {
+.cvat-project-item-ribbon {
+    padding: $grid-unit-size;
+    border-radius: 0 0 0 $border-radius-sm;
+
+    > .ant-ribbon-text {
+        > div {
+            display: flex;
+            flex-direction: column;
+            gap: $grid-unit-size;
+        }
+    }
+}
+
+.cvat-projects-pagination,
+.cvat-resource-pagination-wrapper {
     display: flex;
     justify-content: center;
-    padding: $grid-unit-size * 2 0;
+    padding: $grid-unit-size * 3 0;
 
     .ant-pagination-item {
         border-radius: $border-radius-sm;
-        border: 1px solid $border-color-2;
+        border: 1px solid $border-color-1;
+        min-width: 36px;
+        height: 36px;
+        line-height: 34px;
+        font-weight: 500;
 
-        &:hover, &.ant-pagination-item-active {
+        a {
+            color: $text-color;
+        }
+
+        &:hover {
             border-color: $primary-color;
 
             a {
                 color: $primary-color;
             }
         }
+
+        &.ant-pagination-item-active {
+            background: $primary-color;
+            border-color: $primary-color;
+
+            a {
+                color: white;
+            }
+        }
+    }
+
+    .ant-pagination-prev,
+    .ant-pagination-next {
+        .ant-pagination-item-link {
+            border-radius: $border-radius-sm;
+            border: 1px solid $border-color-1;
+            height: 36px;
+            width: 36px;
+
+            &:hover {
+                border-color: $primary-color;
+                color: $primary-color;
+            }
+        }
+    }
+
+    .ant-pagination-options {
+        .ant-select-selector {
+            border-radius: $border-radius-sm !important;
+            border-color: $border-color-1 !important;
+            height: 36px !important;
+
+            .ant-select-selection-item {
+                line-height: 34px;
+            }
+        }
+    }
+}
+
+.cvat-empty-projects-list,
+.cvat-empty-project-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+
+    .ant-empty {
+        .ant-empty-image {
+            height: 112px;
+            margin-bottom: $grid-unit-size * 2.5;
+
+            svg {
+                width: 112px;
+                height: 112px;
+                opacity: 0.4;
+            }
+        }
+
+        .ant-empty-description {
+            color: $text-color-secondary;
+            font-size: 15px;
+            font-weight: 500;
+        }
     }
 }
 
 .ant-menu.cvat-project-actions-menu {
+    min-width: 190px;
     box-shadow: $box-shadow-lg;
     border-radius: $border-radius-base;
     border: 1px solid $border-color-1;
@@ -137,149 +502,28 @@
 
     > li {
         border-radius: $border-radius-sm;
+        font-weight: 500;
+        font-size: 14px;
+        height: 40px;
+        line-height: 40px;
+        margin: 0;
+        padding: 0 $grid-unit-size * 1.5;
 
         &:hover {
             background-color: $hover-menu-color;
+            color: $primary-color;
         }
     }
 
-    .ant-menu-submenu-title {
-        margin: 0;
-        width: 13em;
-    }
-}
-
-.cvat-project-list-content {
-    .ant-ribbon-wrapper {
-        .cvat-projects-project-item-card {
-            border-radius: $border-radius-base;
-            border: 1px solid $border-color-1;
-            background: $background-color-1;
-            transition: all $transition-base;
-            overflow: hidden;
-
-            &:hover {
-                border-color: $primary-light;
-                box-shadow: $box-shadow-hover;
-                transform: translateY(-2px);
-            }
-
-            .cvat-projects-project-item-card-preview-wrapper {
-                height: 100%;
-                background: $background-color-2;
-
-                .cvat-projects-project-item-card-preview {
-                    height: 100%;
-                    width: 100%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-around;
-                    object-fit: cover;
-                    cursor: pointer;
-                }
-            }
-
-            .cvat-project-item-loading-preview,
-            .cvat-project-item-empty-preview {
-                @extend .cvat-base-preview;
-                background: $background-color-2;
-                color: $text-color-muted;
-
-                &:hover {
-                    cursor: pointer;
-                }
-            }
-
-            .cvat-project-item-loading-preview {
-                padding-top: $grid-unit-size * 3;
-            }
-
-            .cvat-projects-project-item-title {
-                cursor: pointer;
-                font-family: $font-family-heading;
-                font-weight: 600;
-                font-size: 16px;
-                color: $text-color;
-                transition: color $transition-fast;
-
-                &:hover {
-                    color: $primary-color;
-                }
-            }
-
-            .cvat-projects-project-item-description {
-                display: flex;
-                justify-content: space-between;
-                padding: $grid-unit-size * 1.5;
-
-                // actions button
-                > div:nth-child(2) {
-                    display: flex;
-                    align-self: flex-end;
-                    justify-content: center;
-
-                    > button {
-                        color: $text-color-secondary;
-                        width: inherit;
-                        border-radius: $border-radius-sm;
-
-                        &:hover {
-                            color: $primary-color;
-                            background: $hover-menu-color;
-                        }
-                    }
-                }
-            }
-
-            .ant-card-cover {
-                flex: 1;
-                height: 0;
-            }
-
-            display: flex;
-            flex-direction: column;
-        }
-
-        &:nth-child(4n) {
-            border-right: 0;
+    .ant-menu-item-danger {
+        &:hover {
+            color: $danger-color;
+            background: rgba(239, 68, 68, 0.08);
         }
     }
 }
 
-.cvat-project-item-ribbon {
-    padding: $grid-unit-size;
-    height: unset;
-    border-radius: 0 0 0 $border-radius-sm;
-
-    > .ant-ribbon-text {
-        > div {
-            display: flex;
-            flex-direction: column;
-            gap: $grid-unit-size * 2;
-        }
-    }
-}
-
-.cvat-projects-list {
-    overflow-y: auto;
-    display: flex;
-    flex-wrap: wrap;
-    gap: $grid-unit-size * 2;
-
-    .cvat-projects-list-row {
-        width: 100%;
-        margin-bottom: $grid-unit-size;
-
-        > div:not(:first-child) {
-            padding-left: $grid-unit-size;
-        }
-    }
-}
-
-.cvat-export-project-loading {
-    margin-left: 10;
-}
-
+.cvat-export-project-loading,
 .cvat-import-project-button-loading {
-    margin-left: 10;
+    margin-left: $grid-unit-size;
 }

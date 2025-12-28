@@ -31,7 +31,7 @@ const useCardHeight = useCardHeightHOC({
     siblingClassNames: ['cvat-projects-pagination', 'cvat-projects-page-top-bar'],
     paddings: 72,
     minHeight: 200,
-    numberOfRows: 3,
+    numberOfRows: 4,
 });
 
 export default function ProjectItemComponent(props: Props): JSX.Element {

@@ -440,7 +440,7 @@ function HeaderComponent(props: Props): JSX.Element {
                 >
                     Jobs
                 </Button>
-                <Button
+                {/* <Button
                     className={getButtonClassName('cloudstorages')}
                     type='link'
                     value='cloudstorages'
@@ -451,7 +451,7 @@ function HeaderComponent(props: Props): JSX.Element {
                     }}
                 >
                     Cloud Storages
-                </Button>
+                </Button> */}
                 <Button
                     className={getButtonClassName('requests')}
                     type='link'

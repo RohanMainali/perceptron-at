@@ -40,7 +40,7 @@ function TopBarComponent(props: Readonly<Props>): JSX.Element {
     return (
         <Row className='cvat-jobs-page-top-bar' justify='center' align='middle'>
             <Col {...dimensions}>
-                <div>
+                <div className='cvat-jobs-page-filters-wrapper'>
                     <div>
                         <Input.Search
                             enterButton

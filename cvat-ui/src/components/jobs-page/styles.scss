@@ -5,247 +5,412 @@
 
 @import 'base';
 
-// ===================================
-// PERCEPTRON JOBS PAGE DESIGN
-// ===================================
-
+// Modernized jobs gallery
 .cvat-jobs-page {
-    @include cvat-resource-page;
-    padding: $grid-unit-size * 3;
     background: $background-color-2;
+    height: calc(100vh - #{$header-height});
+    padding: $grid-unit-size * 3 $grid-unit-size * 3;
+    display: flex;
+    flex-direction: column;
 
-    .cvat-jobs-page-top-bar {
-        margin-bottom: $grid-unit-size * 2;
-        background: $background-color-1;
-        padding: $grid-unit-size * 2 $grid-unit-size * 3;
-        border-radius: $border-radius-base;
-        box-shadow: $box-shadow-base;
-        border: 1px solid $border-color-1;
-
-        > div {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            > div {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-                gap: $grid-unit-size * 2;
-
-                .cvat-jobs-page-search-bar {
-                    width: $grid-unit-size * 40;
-
-                    .ant-input-affix-wrapper {
-                        border-radius: $border-radius-sm;
-                        border: 1px solid $border-color-2;
-
-                        &:hover, &:focus {
-                            border-color: $primary-color;
-                        }
-                    }
-                }
-
-                > div {
-                    > *:not(:last-child) {
-                        margin-right: $grid-unit-size;
-                    }
-
-                    display: flex;
-                }
-            }
-        }
+    @media (min-width: 1600px) {
+        padding: $grid-unit-size * 3 $grid-unit-size * 5;
     }
+}
 
-    .cvat-empty-jobs-list {
-        .ant-empty {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+.cvat-jobs-page-top-bar {
+    flex-shrink: 0;
+    margin: 0 auto $grid-unit-size * 3;
+    width: 100%;
+    background: $background-color-1;
+    border: 1px solid $border-color-1;
+    border-radius: $border-radius-base;
+    padding: $grid-unit-size * 2 $grid-unit-size * 3;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
 
-            .ant-empty-description {
-                color: $text-color-secondary;
-                font-size: 16px;
-            }
-        }
+    > .ant-col {
+        flex: 1 1 100%;
+        max-width: 100%;
     }
+}
 
-    .cvat-job-page-list-item {
+.cvat-jobs-page-filters-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $grid-unit-size * 2;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+
+    > div:first-of-type {
         display: flex;
-        flex-direction: column;
-        border-radius: $border-radius-base;
-        border: 1px solid $border-color-1;
-        background: $background-color-1;
-        transition: all $transition-base;
-        overflow: hidden;
-
-        &:hover {
-            border-color: $primary-light;
-            box-shadow: $box-shadow-hover;
-            transform: translateY(-2px);
-
-            .cvat-job-page-list-item-id {
-                opacity: 1;
-            }
-
-            .cvat-job-page-list-item-dimension {
-                opacity: 1;
-            }
-
-            .cvat-job-page-list-item-type {
-                opacity: 1;
-            }
-        }
-
-        .ant-card-cover {
-            flex: 1;
-            height: 0;
-            margin: 0;
-            background: $background-color-2;
-        }
-
-        .ant-card-body {
-            padding: $grid-unit-size * 1.5;
-
-            .ant-descriptions-item {
-                padding: 0;
-            }
-        }
-
-        :nth-child(4n) {
-            border-right: 0;
-        }
-
-        .cvat-jobs-page-job-item-card-preview-wrapper {
-            height: 100%;
-            width: 100%;
-
-            > .cvat-jobs-page-job-item-card-preview {
-                .ant-empty-image {
-                    height: $grid-unit-size * 10;
-                }
-
-                height: 100%;
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: space-around;
-                object-fit: cover;
-                cursor: pointer;
-            }
-        }
-
-        .cvat-job-item-loading-preview,
-        .cvat-job-item-empty-preview {
-            @extend .cvat-base-preview;
-            background: $background-color-2;
-            color: $text-color-muted;
-
-            &:hover {
-                cursor: pointer;
-            }
-        }
-
-        .cvat-job-page-list-item-dimension {
-            position: absolute;
-            top: 0;
-            right: 0;
-            margin: $grid-unit-size;
-            width: $grid-unit-size * 4;
-            background: $background-color-1;
-            border-radius: $border-radius-sm;
-            text-align: center;
-            opacity: 0.8;
-            padding: $grid-unit-size * 0.5 $grid-unit-size;
-            font-weight: 500;
-            font-size: 12px;
-            box-shadow: $box-shadow-base;
-        }
-
-        .cvat-job-page-list-item-id {
-            position: absolute;
-            top: 0;
-            left: 0;
-            margin: $grid-unit-size $grid-unit-size $grid-unit-size 0;
-            width: fit-content;
-            background: $primary-color;
-            color: white;
-            border-radius: 0 $border-radius-sm $border-radius-sm 0;
-            padding: $grid-unit-size * 0.5 $grid-unit-size;
-            opacity: 0.9;
-            transition: all $transition-fast;
-            box-shadow: $box-shadow-base;
-            font-weight: 600;
-            font-size: 12px;
-        }
-
-        .cvat-job-page-list-item-type {
-            position: absolute;
-            top: $grid-unit-size * 5;
-            left: 0;
-            margin: $grid-unit-size $grid-unit-size $grid-unit-size 0;
-            width: fit-content;
-            background: $background-color-1;
-            border-radius: 0 $border-radius-sm $border-radius-sm 0;
-            padding: $grid-unit-size * 0.5 $grid-unit-size;
-            opacity: 0.8;
-            transition: all $transition-fast;
-            box-shadow: $box-shadow-base;
-            font-weight: 500;
-            font-size: 12px;
-        }
+        align-items: center;
+        gap: $grid-unit-size * 1.5;
+        flex-wrap: nowrap;
+        min-width: 0;
     }
 
-    .cvat-jobs-page-pagination {
+    > div:last-of-type {
         display: flex;
-        margin-top: $grid-unit-size * 2;
-        justify-content: center;
-
-        .ant-pagination-item {
-            border-radius: $border-radius-sm;
-            border: 1px solid $border-color-2;
-
-            &:hover, &.ant-pagination-item-active {
-                border-color: $primary-color;
-
-                a {
-                    color: $primary-color;
-                }
-            }
-        }
+        align-items: center;
+        gap: $grid-unit-size * 1.5;
+        flex-wrap: nowrap;
+        margin-left: auto;
     }
+}
 
-    .cvat-jobs-page-list {
+.cvat-jobs-page-search-bar {
+    width: 260px;
+    flex: 0 0 auto;
+
+    // Keep enterButton perfectly aligned with the input
+    .ant-input-wrapper {
         display: flex;
-        flex-wrap: wrap;
-        overflow-y: auto;
-        gap: $grid-unit-size * 2;
-
-        .cvat-jobs-list-row {
-            width: 100%;
-            margin-bottom: $grid-unit-size;
-
-            > div:not(:first-child) {
-                padding-left: $grid-unit-size;
-            }
-        }
+        align-items: stretch;
     }
 
-    .cvat-job-card-more-button {
-        position: absolute;
-        bottom: $grid-unit-size * 2;
-        right: $grid-unit-size;
-        font-size: 16px;
-        color: $text-color-secondary;
-        padding: $grid-unit-size * 0.5;
-        border-radius: $border-radius-sm;
+    .ant-input-group-addon {
+        flex: 0 0 auto;
+        padding: 0 !important;
+        background: transparent !important;
+        border: none !important;
+    }
+
+    .ant-input-affix-wrapper {
+        flex: 1 1 auto;
+        width: auto !important;
+        height: 42px;
+        border-radius: $border-radius-sm 0 0 $border-radius-sm !important;
+        border: 1px solid $border-color-1 !important;
+        border-right: none !important;
+        background: $background-color-2 !important;
+        padding: 0 $grid-unit-size * 1.5;
         transition: all $transition-fast;
 
         &:hover {
+            border-color: $border-color-2 !important;
+        }
+
+        &:focus-within {
+            border-color: $primary-color !important;
+            background: $background-color-1 !important;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12) !important;
+        }
+
+        .ant-input {
+            background: transparent !important;
+            color: $text-color;
+
+            &::placeholder {
+                color: $text-color-muted;
+            }
+        }
+    }
+
+    .ant-input-group-addon {
+        .ant-btn-primary {
+            height: 42px !important;
+            width: 42px !important;
+            min-width: 42px !important;
+            border-radius: 0 $border-radius-sm $border-radius-sm 0 !important;
+            background: $primary-color !important;
+            border: 1px solid $primary-color !important;
+            border-left: none !important;
+            margin-left: 0 !important;
+
+            &:hover {
+                background: $primary-dark !important;
+                border-color: $primary-dark !important;
+            }
+        }
+    }
+
+    // Ensure proper spacing after the search component
+    & + * {
+        margin-left: $grid-unit-size * 5 !important;
+    }
+}
+
+.cvat-jobs-page {
+    .cvat-resource-list-wrapper {
+        flex: 1 1 auto;
+        overflow: auto;
+        align-items: start;
+    }
+
+    .cvat-resource-pagination-wrapper {
+        margin-top: auto;
+        flex-shrink: 0;
+    }
+}
+
+.cvat-jobs-page-filters-wrapper {
+    .ant-btn-link {
+        color: $primary-color !important;
+        font-weight: 500;
+        font-size: 14px;
+        padding: 0 $grid-unit-size;
+        height: 42px;
+
+        &:hover {
+            color: $primary-dark !important;
+        }
+    }
+
+    .ant-btn-default {
+        height: 42px !important;
+        border-radius: $border-radius-sm !important;
+        border: 1px solid $border-color-1 !important;
+        background: $background-color-1 !important;
+        font-weight: 500;
+        font-size: 13px;
+        color: $text-color !important;
+        padding: 0 $grid-unit-size * 1.5 !important;
+
+        &:hover {
+            border-color: $primary-color !important;
+            color: $primary-color !important;
+        }
+    }
+}
+
+.cvat-resource-list-wrapper {
+    > .ant-col {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
+.cvat-jobs-page-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: $grid-unit-size * 2.5;
+
+    @media (max-width: 1400px) {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @media (max-width: 1100px) {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+    }
+}
+
+.cvat-jobs-list-row {
+    display: contents;
+}
+
+.cvat-jobs-page-list .ant-col {
+    padding: 0 !important;
+    max-width: 100% !important;
+    flex: none !important;
+    width: auto !important;
+}
+
+.cvat-job-page-list-item {
+    border-radius: $border-radius-base !important;
+    border: 1px solid $border-color-1 !important;
+    background: $background-color-1 !important;
+    transition: all $transition-base;
+    overflow: hidden;
+    position: relative;
+
+    &:hover {
+        border-color: rgba(99, 102, 241, 0.32) !important;
+        box-shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+        transform: translateY(-2px);
+    }
+
+    &.cvat-item-selected {
+        border-color: $primary-color !important;
+        box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
+    }
+
+    .ant-card-cover {
+        height: 140px;
+        background: linear-gradient(145deg, $background-color-2 0%, $background-color-3 100%);
+    }
+
+    .ant-card-body {
+        padding: $grid-unit-size * 2;
+
+        .ant-descriptions-item {
+            padding-bottom: $grid-unit-size * 0.5;
+        }
+    }
+}
+
+.cvat-jobs-page-job-item-card-preview-wrapper {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+
+    .cvat-jobs-page-job-item-card-preview {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+
+.cvat-job-item-loading-preview,
+.cvat-job-item-empty-preview {
+    @extend .cvat-base-preview;
+    background: linear-gradient(145deg, $background-color-2 0%, $background-color-3 100%);
+    color: $text-color-muted;
+    font-size: $grid-unit-size * 5.5;
+}
+
+.cvat-job-page-list-item-id,
+.cvat-job-page-list-item-type,
+.cvat-job-page-list-item-dimension {
+    position: absolute;
+    left: 0;
+    padding: $grid-unit-size * 0.75 $grid-unit-size * 1.5;
+    border-radius: 0 $border-radius-sm $border-radius-sm 0;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 16px rgba(15, 23, 42, 0.12);
+}
+
+.cvat-job-page-list-item-id {
+    top: $grid-unit-size * 0.5;
+    background: $primary-color;
+    color: white;
+}
+
+.cvat-job-page-list-item-type {
+    top: $grid-unit-size * 4;
+    background: rgba(255, 255, 255, 0.9);
+    color: $text-color-secondary;
+}
+
+.cvat-job-page-list-item-dimension {
+    top: $grid-unit-size * 7.5;
+    background: rgba(15, 23, 42, 0.85);
+    color: white;
+}
+
+.cvat-job-card-more-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: $border-radius-sm;
+    width: 36px;
+    height: 36px;
+    color: $text-color-muted;
+
+    &:hover {
+        color: $primary-color;
+        background: $hover-menu-color;
+    }
+}
+
+.cvat-job-page-list-item .ant-descriptions-item-label {
+    color: $text-color-secondary;
+    font-weight: 500;
+}
+
+.cvat-job-page-list-item .ant-descriptions-item-content {
+    color: $text-color;
+    font-weight: 500;
+}
+
+.cvat-jobs-page-pagination {
+    display: flex;
+    justify-content: center;
+    padding: $grid-unit-size * 3 0;
+
+    .ant-pagination-item {
+        border-radius: $border-radius-sm;
+        border: 1px solid $border-color-1;
+        min-width: 36px;
+        height: 36px;
+        line-height: 34px;
+        font-weight: 500;
+
+        a {
+            color: $text-color;
+        }
+
+        &:hover {
+            border-color: $primary-color;
+
+            a {
+                color: $primary-color;
+            }
+        }
+
+        &.ant-pagination-item-active {
+            background: $primary-color;
+            border-color: $primary-color;
+
+            a {
+                color: white;
+            }
+        }
+    }
+
+    .ant-pagination-prev,
+    .ant-pagination-next {
+        .ant-pagination-item-link {
+            border-radius: $border-radius-sm;
+            border: 1px solid $border-color-1;
+            height: 36px;
+            width: 36px;
+
+            &:hover {
+                border-color: $primary-color;
+                color: $primary-color;
+            }
+        }
+    }
+}
+
+.cvat-empty-jobs-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
+
+    .ant-empty {
+        .ant-empty-image {
+            height: 112px;
+            margin-bottom: $grid-unit-size * 2.5;
+
+            svg {
+                width: 112px;
+                height: 112px;
+                opacity: 0.4;
+            }
+        }
+
+        .ant-empty-description {
+            color: $text-color-secondary;
+            font-size: 15px;
+            font-weight: 500;
+        }
+    }
+}
+
+.ant-menu.cvat-job-actions-menu {
+    box-shadow: $box-shadow-lg;
+    border-radius: $border-radius-base;
+    border: 1px solid $border-color-1;
+    padding: $grid-unit-size;
+
+    > li {
+        border-radius: $border-radius-sm;
+        font-weight: 500;
+        height: 38px;
+        line-height: 38px;
+
+        &:hover {
+            background-color: $hover-menu-color;
             color: $primary-color;
-            background: $hover-menu-color;
         }
     }
 }

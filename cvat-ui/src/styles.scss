@@ -329,7 +329,16 @@ html, body {
     height: 100%;
     display: grid;
     min-width: 1024px;
-    background: $background-color-2;
+    background: $background-color-1;
+}
+
+// Ant Design Layout Override
+.ant-layout {
+    background: $background-color-1;
+}
+
+.ant-layout-content {
+    background: $background-color-1;
 }
 
 #layout-grid {
@@ -490,5 +499,180 @@ html, body {
         * {
             user-select: none !important;
         }
+    }
+}
+
+// ===================================
+// FILTER BAR GLOBAL STYLES
+// ===================================
+
+// Search bars - consistent across all pages
+.cvat-projects-page-search-bar,
+.cvat-tasks-page-search-bar,
+.cvat-jobs-page-search-bar,
+.cvat-cloud-storages-page-search-bar {
+    width: 260px;
+
+    // Ensure the input + enterButton align perfectly
+    .ant-input-wrapper {
+        display: flex;
+        align-items: stretch;
+    }
+
+    .ant-input-group-addon {
+        flex: 0 0 auto;
+        padding: 0;
+        background: transparent;
+        border: none;
+    }
+
+    .ant-input-affix-wrapper {
+        // Important: prevent the input from taking 100% width in a flex row
+        // (otherwise the addon button overflows and overlaps the next controls)
+        flex: 1 1 auto;
+        width: auto;
+        height: 42px;
+        border-radius: $border-radius-sm 0 0 $border-radius-sm;
+        border: 1px solid $border-color-1;
+        border-right: none;
+        background: $background-color-2;
+        padding: 0 $grid-unit-size * 1.5;
+        transition: all $transition-fast;
+
+        &:hover {
+            border-color: $border-color-2;
+        }
+
+        &:focus, &.ant-input-affix-wrapper-focused {
+            border-color: $primary-color;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+            background: $background-color-1;
+        }
+
+        .ant-input {
+            font-size: 14px;
+            background: transparent;
+        }
+
+        .ant-input-prefix {
+            margin-right: $grid-unit-size;
+            color: $text-color-muted;
+        }
+    }
+
+    // Make the search button look like it's part of the same control
+    .ant-input-group-addon > .ant-btn {
+        height: 42px;
+        width: 42px;
+        min-width: 42px;
+        border-radius: 0 $border-radius-sm $border-radius-sm 0;
+        margin-left: 0;
+        border: 1px solid $border-color-1;
+        border-left: none;
+    }
+
+    // Ensure there's proper spacing after the entire search component
+    & + * {
+        margin-left: $grid-unit-size * 4;
+    }
+}
+
+.cvat-resource-selection-info {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+    gap: $grid-unit-size * 0.5;
+}
+
+// Filter buttons - Sort by, Quick filters, Filter, Clear filters
+.cvat-sorting-dropdown,
+.cvat-quick-filters-dropdown,
+.cvat-filter-dropdown {
+    .ant-btn {
+        height: 42px;
+        border-radius: $border-radius-base;
+        border: 1px solid $border-color-1;
+        background: $background-color-1;
+        font-weight: 500;
+        font-size: 14px;
+        color: $text-color;
+        display: flex;
+        align-items: center;
+        gap: $grid-unit-size;
+        padding: 0 $grid-unit-size * 2;
+        transition: all $transition-fast;
+
+        &:hover {
+            border-color: $primary-color;
+            color: $primary-color;
+            background: $hover-menu-color;
+        }
+
+        .anticon {
+            font-size: 12px;
+        }
+    }
+}
+
+// Clear filters button
+.cvat-clear-filters-button {
+    height: 42px;
+    border-radius: $border-radius-base;
+    border: 1px solid transparent;
+    background: transparent;
+    font-weight: 500;
+    font-size: 14px;
+    color: $text-color-secondary;
+    padding: 0 $grid-unit-size * 1.5;
+    transition: all $transition-fast;
+
+    &:hover {
+        color: $danger-color;
+        background: rgba(239, 68, 68, 0.05);
+    }
+}
+
+// Add/Create dropdown trigger buttons (square +)
+// Note: do NOT style `.cvat-create-*-button` here, those classes are used for full-width
+// menu items inside popovers on multiple pages.
+.cvat-create-project-dropdown,
+.cvat-create-task-dropdown {
+    height: 42px;
+    width: 42px;
+    min-width: 42px;
+    border-radius: $border-radius-base;
+    background: $primary-color;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+    transition: all $transition-fast;
+
+    .anticon {
+        font-size: 18px;
+        color: white;
+    }
+
+    &:hover {
+        background: $primary-dark;
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
+        transform: translateY(-1px);
+    }
+}
+
+// Select all link
+.cvat-select-all-projects-link,
+.cvat-select-all-tasks-link,
+.cvat-select-all-jobs-link {
+    color: $primary-color;
+    font-weight: 500;
+    font-size: 14px;
+    cursor: pointer;
+    transition: color $transition-fast;
+    white-space: nowrap;
+
+    &:hover {
+        color: $primary-dark;
     }
 }
