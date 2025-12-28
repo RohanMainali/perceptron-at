@@ -8,31 +8,34 @@
 .cvat-objects-appearance-collapse.ant-collapse {
     width: 100%;
     border-radius: 0;
+    border: none;
+    background: #fff;
 
     > .ant-collapse-item {
         border: none;
 
         > .ant-collapse-header {
-            padding-top: 2.5px;
-            padding-bottom: 2.5px;
-            background: $header-color;
+            padding: $grid-unit-size * 1.5 $grid-unit-size * 2;
+            background: #f9fafb;
             border-radius: 0;
-            height: 25px;
+            height: auto;
+            border-top: 1px solid #e5e7eb;
+            font-weight: 500;
+            color: #374151;
 
             .ant-collapse-arrow {
                 padding: 0;
-                top: $grid-unit-size;
+                color: #667eea;
             }
         }
 
         > .ant-collapse-content {
-            background: $background-color-2;
+            background: #fff;
             border-bottom: none;
-            padding-bottom: $grid-unit-size * 3;
+            padding-bottom: $grid-unit-size * 2;
 
             > .ant-collapse-content-box {
-                padding: 10px;
-                padding-bottom: 0;
+                padding: $grid-unit-size * 1.5 $grid-unit-size * 2;
             }
         }
     }
@@ -49,7 +52,7 @@
 }
 
 .cvat-objects-sidebar-tabs.ant-tabs.ant-tabs-card {
-    background: $header-color;
+    background: #fff;
     box-sizing: border-box;
     border: none;
 
@@ -60,56 +63,131 @@
 
         border: none;
         margin-bottom: 0;
+        padding: $grid-unit-size $grid-unit-size 0;
+        background: #f9fafb;
 
         .ant-tabs-tab.ant-tabs-tab-active {
             opacity: 1;
-            background: $objects-bar-tabs-color;
+            background: #fff;
+            border-color: #e5e7eb;
+            border-bottom-color: #fff;
+
+            .ant-tabs-tab-btn {
+                color: #667eea;
+                font-weight: 600;
+            }
         }
 
         .ant-tabs-tab {
-            padding: $grid-unit-size $grid-unit-size * 2 $grid-unit-size $grid-unit-size * 2;
-            background: none;
-            border: none;
+            padding: $grid-unit-size $grid-unit-size * 2;
+            background: transparent;
+            border: 1px solid transparent;
+            border-bottom: none;
             user-select: none;
             border-radius: $grid-unit-size $grid-unit-size 0 0;
+            margin-right: 4px;
+            transition: all 0.2s ease;
+
+            .ant-tabs-tab-btn {
+                color: #6b7280;
+                font-size: 13px;
+            }
+
+            &:hover:not(.ant-tabs-tab-active) {
+                background: rgba(102, 126, 234, 0.05);
+
+                .ant-tabs-tab-btn {
+                    color: #667eea;
+                }
+            }
+        }
+    }
+
+    .ant-tabs-content-holder {
+        background: #fff;
+        border-top: 1px solid #e5e7eb;
+        flex: 1;
+        overflow: hidden;
+    }
+
+    .ant-tabs-content {
+        height: 100%;
+    }
+
+    .ant-tabs-tabpane {
+        height: 100%;
+        overflow: hidden auto;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: #d1d5db;
+            border-radius: 3px;
+
+            &:hover {
+                background: #9ca3af;
+            }
         }
     }
 }
 
 .cvat-objects-sidebar-labels-list-header {
-    background: $objects-bar-tabs-color;
-    padding: $grid-unit-size;
-    border-bottom: 1px solid $border-color-1;
+    background: #fff;
+    padding: $grid-unit-size * 1.5;
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .cvat-objects-sidebar-issues-list-header {
-    background: $objects-bar-tabs-color;
-    padding: $grid-unit-size;
+    background: #fff;
+    padding: $grid-unit-size * 1.5;
     box-sizing: border-box;
-    border-bottom: 1px solid $border-color-1;
+    border-bottom: 1px solid #e5e7eb;
 
     > div > div {
         > span[role='img'] {
             font-size: 16px;
-            color: $objects-bar-icons-color;
+            color: #6b7280;
+            transition: all 0.2s ease;
 
             &:hover {
                 transform: scale(1.1);
-                opacity: 0.8;
+                color: #667eea;
             }
 
             &:active {
                 transform: scale(1);
-                opacity: 0.7;
             }
         }
     }
 }
 
 .cvat-objects-sidebar-issues-list {
-    background-color: $background-color-2;
+    background-color: #fafbfc;
     height: calc(100% - $grid-unit-size * 4);
     overflow: hidden auto;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 3px;
+
+        &:hover {
+            background: #9ca3af;
+        }
+    }
 }
 
 .cvat-objects-sidebar-issue-item {
@@ -167,10 +245,10 @@
 }
 
 .cvat-objects-sidebar-states-header {
-    background: $objects-bar-tabs-color;
-    padding: $grid-unit-size $grid-unit-size * 2 $grid-unit-size $grid-unit-size * 2;
+    background: #fff;
+    padding: $grid-unit-size * 1.5 $grid-unit-size * 2;
     line-height: $grid-unit-size * 3;
-    border-bottom: 1px solid $border-color-1;
+    border-bottom: 1px solid #e5e7eb;
 
     > div {
         > div:nth-child(1) {
@@ -204,9 +282,26 @@
 }
 
 .cvat-objects-sidebar-states-list {
-    background-color: $background-color-2;
+    background-color: #fafbfc;
     height: calc(100% - $grid-unit-size * 9);
     overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 3px;
+
+        &:hover {
+            background: #9ca3af;
+        }
+    }
 
     .cvat-objects-sidebar-state-item {
         // opacity 0.53 in sidebar to keep the same look as before on sidebar
@@ -339,9 +434,26 @@
 }
 
 .cvat-objects-sidebar-labels-list {
-    background-color: $background-color-2;
+    background-color: #fafbfc;
     height: 100%;
     overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 3px;
+
+        &:hover {
+            background: #9ca3af;
+        }
+    }
 }
 
 .cvat-objects-sidebar-label-active-item {
@@ -486,4 +598,541 @@
         margin-left: $grid-unit-size * 0.5;
         width: $grid-unit-size * 9;
     }
+}
+
+// =============================================================================
+// AI CHAT PANEL - REDESIGNED
+// =============================================================================
+.cvat-ai-chat-panel {
+    border-top: 1px solid $border-color-1;
+    background: #fff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    min-height: 56px;
+    flex-shrink: 0;
+    overflow: hidden;
+
+    &.cvat-ai-chat-panel-expanded {
+        flex: 1;
+        min-height: 350px;
+        max-height: calc(100% - 56px);
+    }
+}
+
+.cvat-ai-chat-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $grid-unit-size * 1.5 $grid-unit-size * 2;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    cursor: pointer;
+    user-select: none;
+    min-height: 56px;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+
+    &:hover {
+        background: linear-gradient(135deg, #5a6fd6 0%, #6a4190 100%);
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.cvat-ai-chat-header-left {
+    display: flex;
+    align-items: center;
+    gap: $grid-unit-size * 1.5;
+}
+
+.cvat-ai-chat-icon-wrapper {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+}
+
+.cvat-ai-chat-icon {
+    font-size: 20px;
+    color: #fff;
+}
+
+.cvat-ai-chat-header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.cvat-ai-chat-title {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 1.2;
+}
+
+.cvat-ai-chat-subtitle {
+    font-size: 11px;
+    opacity: 0.85;
+    font-weight: 400;
+}
+
+.cvat-ai-chat-header-actions {
+    display: flex;
+    gap: 4px;
+
+    .ant-btn {
+        color: rgba(255, 255, 255, 0.9);
+        border: none;
+        width: 32px;
+        height: 32px;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+
+        &:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        &.cvat-ai-chat-btn-active {
+            background: rgba(255, 255, 255, 0.25);
+        }
+    }
+}
+
+.cvat-ai-chat-body {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    overflow: hidden;
+    background: #fafbfc;
+}
+
+.cvat-ai-chat-config {
+    padding: $grid-unit-size * 1.5;
+    background: #fff;
+    border-bottom: 1px solid #eef0f2;
+    display: flex;
+    flex-direction: column;
+    gap: $grid-unit-size * 1.5;
+}
+
+.cvat-ai-chat-config-section {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.cvat-ai-chat-config-row {
+    display: flex;
+    gap: $grid-unit-size;
+}
+
+.cvat-ai-chat-config-section-half {
+    flex: 1;
+}
+
+.cvat-ai-chat-config-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #6b7280;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cvat-ai-chat-config-select {
+    width: 100%;
+
+    .ant-select-selector {
+        border-radius: 8px !important;
+        border-color: #e5e7eb !important;
+        min-height: 36px;
+    }
+
+    &:hover .ant-select-selector {
+        border-color: #667eea !important;
+    }
+
+    &.ant-select-focused .ant-select-selector {
+        border-color: #667eea !important;
+        box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1) !important;
+    }
+}
+
+.cvat-ai-chat-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    .anticon {
+        font-size: 14px;
+        color: #667eea;
+    }
+}
+
+.cvat-ai-chat-config-input {
+    width: 100%;
+
+    &.ant-input-number {
+        border-radius: 8px;
+        border-color: #e5e7eb;
+
+        &:hover {
+            border-color: #667eea;
+        }
+
+        &:focus,
+        &.ant-input-number-focused {
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+    }
+}
+
+.cvat-ai-chat-config-checkbox {
+    .ant-checkbox-inner {
+        border-radius: 4px;
+        border-color: #d1d5db;
+    }
+
+    .ant-checkbox-checked .ant-checkbox-inner {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-color: #667eea;
+    }
+}
+
+.cvat-ai-chat-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+
+    .anticon {
+        color: #667eea;
+        font-size: 14px;
+    }
+}
+
+.cvat-ai-chat-checkbox-hint {
+    font-size: 11px;
+    color: #9ca3af;
+    margin-left: auto;
+}
+
+.cvat-ai-chat-divider {
+    margin: 0;
+    border-color: #eef0f2;
+}
+
+.cvat-ai-chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: $grid-unit-size * 1.5;
+    display: flex;
+    flex-direction: column;
+    gap: $grid-unit-size * 1.5;
+    background: #fafbfc;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: #d1d5db;
+        border-radius: 3px;
+
+        &:hover {
+            background: #9ca3af;
+        }
+    }
+}
+
+.cvat-ai-chat-message {
+    display: flex;
+    gap: $grid-unit-size;
+    max-width: 90%;
+    animation: messageSlideIn 0.2s ease-out;
+
+    @keyframes messageSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(8px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    &.cvat-ai-chat-message-user {
+        align-self: flex-end;
+        flex-direction: row-reverse;
+
+        .cvat-ai-chat-message-content {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            border-radius: 16px 16px 4px 16px;
+        }
+
+        .cvat-ai-chat-message-time {
+            color: rgba(255, 255, 255, 0.7);
+            text-align: right;
+        }
+
+        .cvat-ai-chat-message-avatar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+
+            .anticon {
+                color: #fff;
+            }
+        }
+    }
+
+    &.cvat-ai-chat-message-assistant {
+        align-self: flex-start;
+
+        .cvat-ai-chat-message-content {
+            background: #fff;
+            border: 1px solid #e5e7eb;
+            border-radius: 16px 16px 16px 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+        }
+    }
+}
+
+.cvat-ai-chat-message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: #f3f4f6;
+    border: 1px solid #e5e7eb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    .anticon {
+        font-size: 16px;
+        color: #667eea;
+    }
+}
+
+.cvat-ai-chat-message-content {
+    padding: $grid-unit-size * 1.5;
+    max-width: 100%;
+
+    &.cvat-ai-chat-loading {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: $grid-unit-size;
+        color: #6b7280;
+        font-size: 13px;
+    }
+}
+
+.cvat-ai-chat-message-text {
+    font-size: 13px;
+    line-height: 1.6;
+    word-break: break-word;
+    white-space: pre-wrap;
+
+    strong {
+        font-weight: 600;
+        color: inherit;
+    }
+
+    .cvat-ai-chat-bullet {
+        display: block;
+        padding-left: 4px;
+    }
+
+    .cvat-ai-chat-note {
+        display: block;
+        font-style: italic;
+        opacity: 0.75;
+        font-size: 12px;
+        margin-top: 8px;
+    }
+}
+
+.cvat-ai-chat-message-time {
+    font-size: 10px;
+    color: #9ca3af;
+    margin-top: 6px;
+}
+
+.cvat-ai-chat-input-container {
+    display: flex;
+    gap: $grid-unit-size;
+    padding: $grid-unit-size * 1.5;
+    background: #fff;
+    border-top: 1px solid #eef0f2;
+    align-items: flex-end;
+    flex-shrink: 0;
+
+    .cvat-ai-chat-input {
+        border-radius: 12px;
+        border-color: #e5e7eb;
+        padding: $grid-unit-size $grid-unit-size * 1.5;
+        resize: none;
+        font-size: 13px;
+
+        &:hover {
+            border-color: #667eea;
+        }
+
+        &:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.1);
+        }
+
+        &::placeholder {
+            color: #9ca3af;
+        }
+    }
+}
+
+.cvat-ai-chat-send-button {
+    height: 40px;
+    width: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+        transform: scale(1.05);
+        box-shadow: 0 4px 12px rgba(102, 126, 234, 0.35);
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        background: #e5e7eb;
+    }
+}
+
+// When chat is expanded, sidebar has special state
+.cvat-objects-sidebar-chat-expanded {
+    .cvat-objects-sidebar-content {
+        flex: 0;
+        min-height: 48px;
+        max-height: 48px;
+        overflow: hidden;
+
+        .cvat-objects-sidebar-tabs {
+            .ant-tabs-content-holder {
+                display: none;
+            }
+        }
+    }
+}
+
+// =============================================================================
+// REDESIGNED SIDEBAR - MODERN AESTHETIC
+// =============================================================================
+.cvat-objects-sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    background: #fff;
+    border-left: 1px solid #e5e7eb;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.04);
+    overflow: hidden;
+
+    > .ant-layout-sider-children {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        overflow: hidden;
+    }
+}
+
+.cvat-objects-sidebar-sider {
+    position: absolute;
+    left: -24px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 48px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-right: none;
+    border-radius: 8px 0 0 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+    box-shadow: -2px 0 4px rgba(0, 0, 0, 0.04);
+
+    &:hover {
+        background: #f9fafb;
+        width: 28px;
+        left: -28px;
+    }
+
+    .anticon {
+        font-size: 12px;
+        color: #6b7280;
+    }
+}
+
+// Main content area
+.cvat-objects-sidebar-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &.cvat-objects-sidebar-content-collapsed {
+        flex: 0;
+        min-height: 48px;
+        max-height: 48px;
+
+        .cvat-objects-sidebar-tabs {
+            .ant-tabs-content-holder {
+                display: none;
+            }
+        }
+
+        .cvat-objects-appearance-collapse {
+            display: none;
+        }
+    }
+}
+
+// Fix tooltip overflow causing scrollbar on hover
+.cvat-ai-chat-header-actions {
+    .ant-tooltip {
+        position: fixed !important;
+    }
+}
+
+// Ensure sidebar doesn't show horizontal scrollbar
+.cvat-objects-sidebar,
+.cvat-objects-sidebar > .ant-layout-sider-children,
+.cvat-ai-chat-panel {
+    overflow-x: hidden !important;
 }

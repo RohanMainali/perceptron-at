@@ -1,10 +1,11 @@
 // Copyright (C) 2020-2022 Intel Corporation
 // Copyright (C) CVAT.ai Corporation
+// Copyright (C) 2024 Perceptron AI Corporation
 //
 // SPDX-License-Identifier: MIT
 
 import './styles.scss';
-import React, { Dispatch, TransitionEvent } from 'react';
+import React, { Dispatch, TransitionEvent, useState, useCallback } from 'react';
 import { AnyAction } from 'redux';
 import { connect } from 'react-redux';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
@@ -17,6 +18,7 @@ import LabelsList from 'components/annotation-page/standard-workspace/objects-si
 import { collapseSidebar as collapseSidebarAction } from 'actions/annotation-actions';
 import AppearanceBlock from 'components/annotation-page/appearance-block';
 import IssuesListComponent from 'components/annotation-page/standard-workspace/objects-side-bar/issues-list';
+import AIChatPanel from 'components/annotation-page/standard-workspace/objects-side-bar/ai-chat-panel';
 
 interface OwnProps {
     objectsList: JSX.Element;
@@ -58,6 +60,9 @@ function ObjectsSideBar(props: StateToProps & DispatchToProps & OwnProps): JSX.E
         sidebarCollapsed, collapseSidebar, objectsList, jobInstance,
     } = props;
 
+    // State for managing panel expansion
+    const [isChatExpanded, setIsChatExpanded] = useState(false);
+
     const collapse = (): void => {
         const [collapser] = window.document.getElementsByClassName('cvat-objects-sidebar');
         const listener = (event: TransitionEvent): void => {
@@ -74,42 +79,58 @@ function ObjectsSideBar(props: StateToProps & DispatchToProps & OwnProps): JSX.E
         collapseSidebar();
     };
 
+    const handleToggleChat = useCallback(() => {
+        setIsChatExpanded((prev) => !prev);
+    }, []);
+
     const is2D = jobInstance ? jobInstance.dimension === DimensionType.DIMENSION_2D : true;
+
     return (
         <Layout.Sider
-            className='cvat-objects-sidebar'
+            className={`cvat-objects-sidebar ${isChatExpanded ? 'cvat-objects-sidebar-chat-expanded' : ''}`}
             theme='light'
-            width={300}
+            width={320}
             collapsedWidth={0}
             reverseArrow
             collapsible
             trigger={null}
             collapsed={sidebarCollapsed}
         >
-            {/* eslint-disable-next-line */}
+            {/* Collapse Toggle */}
             <span
                 className='cvat-objects-sidebar-sider'
                 onClick={collapse}
+                role='button'
+                tabIndex={0}
             >
                 {sidebarCollapsed ? <MenuFoldOutlined title='Show' /> : <MenuUnfoldOutlined title='Hide' />}
             </span>
 
-            <Tabs
-                type='card'
-                defaultActiveKey='objects'
-                className='cvat-objects-sidebar-tabs'
-                items={[{
-                    key: 'objects',
-                    label: 'Objects',
-                    children: objectsList,
-                }, {
-                    key: 'labels',
-                    label: 'Labels',
-                    forceRender: true,
-                    children: <LabelsList />,
-                }, ...(is2D ? [{ key: 'issues', label: 'Issues', children: <IssuesListComponent /> }] : [])]}
+            {/* Main Content Area */}
+            <div className={`cvat-objects-sidebar-content ${isChatExpanded ? 'cvat-objects-sidebar-content-collapsed' : ''}`}>
+                <Tabs
+                    type='card'
+                    defaultActiveKey='objects'
+                    className='cvat-objects-sidebar-tabs'
+                    items={[{
+                        key: 'objects',
+                        label: 'Objects',
+                        children: objectsList,
+                    }, {
+                        key: 'labels',
+                        label: 'Labels',
+                        forceRender: true,
+                        children: <LabelsList />,
+                    }, ...(is2D ? [{ key: 'issues', label: 'Issues', children: <IssuesListComponent /> }] : [])]}
+                />
+                {!sidebarCollapsed && !isChatExpanded && <AppearanceBlock />}
+            </div>
+
+            {/* AI Chat Panel */}
+            <AIChatPanel
+                isExpanded={isChatExpanded}
+                onToggleExpand={handleToggleChat}
             />
-            {!sidebarCollapsed && <AppearanceBlock />}
         </Layout.Sider>
     );
 }
