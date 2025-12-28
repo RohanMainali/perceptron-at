@@ -232,7 +232,7 @@ export default function ControlsSideBarComponent(props: Props): JSX.Element {
 
     const controlsDisabled = !applicableLabels.length;
     return (
-        <Layout.Sider className='cvat-canvas-controls-sidebar' theme='light' width={44}>
+        <Layout.Sider className='cvat-canvas-controls-sidebar' theme='light' width={52}>
             <GlobalHotKeys
                 keyMap={applicableLabels.length ? subKeyMap(componentShortcuts, keyMap) : {}}
                 handlers={handlers}

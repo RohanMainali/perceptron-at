@@ -12,7 +12,7 @@
 .cvat-annotation-page.ant-layout {
     height: 100%;
     overflow: hidden;
-    background: $background-dark;
+    background: $background-color-2;
 }
 
 .cvat-annotation-layout-content {
@@ -21,10 +21,10 @@
 }
 
 .ant-layout-header.cvat-annotation-header {
-    background: $background-dark-secondary;
+    background: $background-color-1;
     height: 56px;
     padding: 0 $grid-unit-size * 2;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid $border-color-1;
 
     > div:first-child {
         display: flex;
@@ -38,7 +38,7 @@
         min-width: $grid-unit-size * 7;
         height: $grid-unit-size * 5;
         user-select: none;
-        color: rgba(255, 255, 255, 0.7);
+        color: $text-color-secondary;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -48,13 +48,13 @@
         transition: all $transition-fast;
 
         &.cvat-button-active {
-            color: $primary-light;
-            background: rgba(99, 102, 241, 0.15);
+            color: $primary-dark;
+            background: $notification-background-color-1;
         }
 
         &:hover {
-            color: white;
-            background: rgba(255, 255, 255, 0.08);
+            color: $text-color;
+            background: $hover-menu-color;
         }
 
         > span:not([role='img']) {
@@ -77,7 +77,7 @@
 
         &.filters-armed {
             color: $secondary-color;
-            background: rgba(14, 165, 233, 0.15);
+            background: rgba(14, 165, 233, 12%);
 
             path {
                 fill: $secondary-color;
@@ -134,7 +134,7 @@
     > span {
         font-size: 18px;
         margin: 0 4px;
-        color: rgba(255, 255, 255, 0.8);
+        color: $text-color-secondary;
         cursor: pointer;
         transition: all $transition-fast;
         padding: 6px;
@@ -142,8 +142,8 @@
 
         &:hover {
             transform: scale(1.15);
-            color: white;
-            background: rgba(255, 255, 255, 0.1);
+            color: $text-color;
+            background: $hover-menu-color;
         }
 
         &:active {
@@ -173,7 +173,7 @@
         width: 14px;
         height: 14px;
         background: $primary-color;
-        border: 2px solid white;
+        border: 2px solid $background-color-1;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
 
@@ -185,7 +185,7 @@
 
     > .ant-slider-rail {
         height: 6px;
-        background-color: rgba(255, 255, 255, 0.2);
+        background-color: $border-color-2;
         border-radius: 3px;
     }
 
@@ -198,7 +198,7 @@
                 display: inline-block;
                 width: 2px;
                 height: 10px;
-                background-color: rgba(255, 255, 255, 0.4);
+                    background-color: $border-color-2;
                 border-radius: 2px;
                 transition: all 0.15s ease;
                 transform-origin: center center;
@@ -244,7 +244,7 @@
         text-overflow: ellipsis;
         user-select: none;
         word-break: break-all;
-        color: rgba(255, 255, 255, 0.7);
+        color: $text-color-secondary;
         font-size: 12px;
     }
 }
@@ -255,12 +255,12 @@
 .cvat-player-copy-frame-name-icon,
 .cvat-player-search-frame-name-icon {
     opacity: 0.6;
-    color: rgba(255, 255, 255, 0.8);
+    color: $text-color-secondary;
     transition: all $transition-fast;
 
     &:hover {
         opacity: 1;
-        color: white;
+        color: $text-color;
     }
 
     &:active {
@@ -280,10 +280,10 @@
     margin-left: 5px;
 
     .ant-input-number {
-        background: rgba(255, 255, 255, 0.1);
-        border: 1px solid rgba(255, 255, 255, 0.2);
+        background: $background-color-2;
+        border: 1px solid $border-color-2;
         border-radius: $border-radius-sm;
-        color: white;
+        color: $text-color;
 
         &:hover, &:focus {
             border-color: $primary-color;
@@ -299,7 +299,7 @@
         width: var(--frame-input-width, 6ch);
         min-width: 6ch;
         max-width: 10ch;
-        color: white;
+        color: $text-color;
     }
 }
 
@@ -324,14 +324,14 @@
     width: 160px;
 
     .ant-select-selector {
-        background: rgba(255, 255, 255, 0.1) !important;
-        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        background: $background-color-2 !important;
+        border: 1px solid $border-color-2 !important;
         border-radius: $border-radius-sm !important;
-        color: white !important;
+        color: $text-color !important;
     }
 
     .ant-select-arrow {
-        color: rgba(255, 255, 255, 0.6);
+        color: $text-color-secondary;
     }
 }
 
@@ -440,7 +440,7 @@
     opacity: 0.6;
     position: fixed;
     z-index: 10;
-    background-color: #fff;
+    background-color: $background-color-1;
     border-radius: $border-radius-base;
 
     &:hover {
@@ -543,7 +543,7 @@
         margin: 5px 3px;
 
         > .ant-slider-rail {
-            background-color: #979797;
+            background-color: $text-color-muted;
         }
 
         > .ant-slider-handle {
@@ -578,7 +578,7 @@
         &:hover {
             transform: translateX(2px);
             box-shadow: 0 2px 5px rgba(0,0,0,10%);
-            background-color: #f5f5f5;
+            background-color: $background-color-2;
         }
     }
 }
